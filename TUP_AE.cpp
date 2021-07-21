@@ -7,6 +7,7 @@ using namespace std;
 
 vector<vector <int>> dist;
 vector<vector <int>> opponents;
+vector<vector <int>> home_venues;
 
 # define POPULATION_SIZE 100
 # define MAX_ITER 200
@@ -39,19 +40,13 @@ int* tokenize(string line, int nTeams) {
 
     return dist_values;
 }
+/*
 
-// generate a random number
-int random_num(int start, int end) {
-    int range = (end - start) + 1;
-    int random_int = start + (rand()%range);
-    return random_int;
-}
 // generate a gene
 int mutated_genes(int nTeams) {
     int r = random_num(0, nTeams-1);
     return r;
 }
-
 
 // create a chromosome (random sequence of genes)
 vector<int> create_gnome(int nTeams) {
@@ -59,6 +54,29 @@ vector<int> create_gnome(int nTeams) {
     vector<int> gnome;
     for (int i = 0; i < nRounds; ++i)
         gnome.push_back(mutated_genes(nTeams));
+
+    return gnome;
+}*/
+
+// generate a random number
+int random_num(int start, int end) {
+    int range = (end - start) + 1;
+    int random_int = start + (rand()%range);
+    return random_int;
+}
+
+int mutated_genes(vector<int> round) {
+    int home_venue = round[(rand()%2)]-1;
+
+    return home_venue;
+}
+
+// create a chromosome (random sequence of genes)
+vector<int> create_gnome(int nTeams) {
+    int nRounds = 2*nTeams - 2;
+    vector<int> gnome;
+    for (int i = 0; i < nRounds; ++i)
+        gnome.push_back(mutated_genes(home_venues[i]));
 
     return gnome;
 }
@@ -103,7 +121,7 @@ Individual Individual::mate(Individual par2) {
 
         // insert random gene if 0.90 < p
         else
-            child_chromosome.push_back(mutated_genes(nTeams));
+            child_chromosome.push_back(mutated_genes(home_venues[i]));
     }
 
     return Individual(child_chromosome);
@@ -196,8 +214,8 @@ int main(int argc, char const *argv[]){
     }
     fclose(fp);
 
-
-    vector<vector<int>> v = generate_home_venues();
+    // tuples of home venues for each round
+    home_venues = generate_home_venues();
 
 
     //actual AE
@@ -269,7 +287,7 @@ int main(int argc, char const *argv[]){
     printf("Sequence: ");
     for (int i = 0; i < population[0].chromosome.size(); ++i)
     {
-        printf("%d -> ", population[0].chromosome[i]);
+        printf("%d -> ", population[0].chromosome[i]+1);
     }
     printf("&& Fitness: %d\n", population[0].fitness);
 
