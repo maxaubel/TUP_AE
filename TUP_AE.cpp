@@ -3,9 +3,6 @@
 #include <regex>
 #include <vector>
 
-//#include <string>
-//#include <string.h>
-//#include <algorithm>
 using namespace std;
 
 vector<vector <int>> dist;
@@ -42,18 +39,19 @@ int* tokenize(string line, int nTeams) {
 
     return dist_values;
 }
+
 // generate a random number
 int random_num(int start, int end) {
     int range = (end - start) + 1;
     int random_int = start + (rand()%range);
     return random_int;
 }
-
 // generate a gene
 int mutated_genes(int nTeams) {
     int r = random_num(0, nTeams-1);
     return r;
 }
+
 
 // create a chromosome (random sequence of genes)
 vector<int> create_gnome(int nTeams) {
@@ -117,14 +115,8 @@ int Individual::cal_fitness() {
     int len = chromosome.size();
 
     for (int i = 0; i < len-1; i++)
-    {
         fitness += dist[chromosome[i]][chromosome[i+1]];
-        printf("[%d][%d]%d", chromosome[i],chromosome[i+1], dist[chromosome[i]][chromosome[i+1]]);
-
-        printf("(%d) ", fitness);
-    }
-
-    printf("-----> fitness: %d\n", fitness);
+    
     return fitness;
 }
 
@@ -134,6 +126,25 @@ bool operator<(const Individual &ind1, const Individual &ind2)
     return ind1.fitness < ind2.fitness;
 }
 
+
+// RESTRICTIONS
+vector<vector<int>> generate_home_venues() {
+    
+    vector<vector <int>> home_venues; // the 2 home venues for each round
+    
+    for (int i = 0; i < opponents.size(); ++i) {
+        vector<int> round;
+
+        for (int j = 0; j < opponents[i].size(); ++j)
+            if (opponents[i][j] < 0)
+                round.push_back( -opponents[i][j] );
+
+        home_venues.push_back(round);
+    }
+
+
+    return home_venues;
+}
 
 int main(int argc, char const *argv[]){
 
@@ -185,6 +196,8 @@ int main(int argc, char const *argv[]){
     }
     fclose(fp);
 
+
+    vector<vector<int>> v = generate_home_venues();
 
 
     //actual AE
@@ -242,19 +255,23 @@ int main(int argc, char const *argv[]){
         {
             printf("%d , ", population[0].chromosome[i]);
         }
-        printf(" && Fitness: %d\n", population[0].fitness);
+        int sum = 0;
+        for (int i = 0; i < population.size(); ++i)
+        {
+            sum += population[i].fitness;
+        }
+        printf(" && Gen total fitness: %d\n", sum);
 
-        //////
-        if (population[0].fitness < 0) return 0;
+
     }
 
-    printf("Generation: %d\n", current_iter);
+    printf("Generation: %d && ", current_iter);
     printf("Sequence: ");
     for (int i = 0; i < population[0].chromosome.size(); ++i)
     {
         printf("%d -> ", population[0].chromosome[i]);
     }
-    printf("Fitness: %d\n", population[0].fitness);
+    printf("&& Fitness: %d\n", population[0].fitness);
 
 
 

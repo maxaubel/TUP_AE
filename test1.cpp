@@ -1,21 +1,17 @@
-#include <bits/stdc++.h>
 #include <iostream>
-#include <regex>
-#include <vector>
 
 //#include <string>
 //#include <string.h>
 //#include <algorithm>
 using namespace std;
 
-vector<vector <int>> A;
-
-void foo() {
-	cout << A[0][0];
-}
 int main(){
-	std::vector<int> a;
-	a.push_back(10);
-	A.push_back(a);
-	foo();
+
+	int random_int = 0;
+	for (int i = 0; i < 1000; ++i)
+	{
+    	random_int += (rand()%2);
+    	printf("%d\n", random_int);
+	}
+
 }
