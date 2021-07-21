@@ -117,7 +117,7 @@ bool operator<(const Individual &ind1, const Individual &ind2)
 
 // Driver code
 int main()
-{
+{	
 	srand((unsigned)(time(0)));
 
 	// current generation
