@@ -40,23 +40,7 @@ int* tokenize(string line, int nTeams) {
 
     return dist_values;
 }
-/*
 
-// generate a gene
-int mutated_genes(int nTeams) {
-    int r = random_num(0, nTeams-1);
-    return r;
-}
-
-// create a chromosome (random sequence of genes)
-vector<int> create_gnome(int nTeams) {
-    int nRounds = 2*nTeams - 2;
-    vector<int> gnome;
-    for (int i = 0; i < nRounds; ++i)
-        gnome.push_back(mutated_genes(nTeams));
-
-    return gnome;
-}*/
 
 // generate a random number
 int random_num(int start, int end) {
@@ -79,6 +63,18 @@ vector<int> create_gnome(int nTeams) {
         gnome.push_back(mutated_genes(home_venues[i]));
 
     return gnome;
+}
+
+
+int get_the_other_venue(int round_n, int ump1) { /////////////////////////////////////////////////// TODO
+
+    // int ump2 = -ump1 + 1; // get the alternate home venue
+
+
+    if (home_venues[round_n][0] == ump1)
+        return home_venues[round_n][1];
+
+    return home_venues[round_n][0];
 }
 
 // class to represent an individual from in a population
@@ -132,8 +128,17 @@ int Individual::cal_fitness() {
     fitness = 0;
     int len = chromosome.size();
 
-    for (int i = 0; i < len-1; i++)
+    for (int i = 0; i < len-1; i++) {
+        
+        // Umpire 1
         fitness += dist[chromosome[i]][chromosome[i+1]];
+
+        // Umpire 2
+        int ump2_start = get_the_other_venue(i, chromosome[i]+1);
+        int ump2_end = get_the_other_venue(i, chromosome[i+1]+1);
+
+        fitness += dist[ump2_start][ump2_end];
+    }
     
     return fitness;
 }
@@ -224,6 +229,7 @@ int main(int argc, char const *argv[]){
     srand((unsigned)(time(0)));
     vector<Individual> population;
 
+
     // Generate first generation
     for (int i = 0; i < POPULATION_SIZE; ++i)
     {
@@ -284,10 +290,16 @@ int main(int argc, char const *argv[]){
     }
 
     printf("Generation: %d && ", current_iter);
-    printf("Sequence: ");
+    printf("Umpire1: ");
     for (int i = 0; i < population[0].chromosome.size(); ++i)
     {
         printf("%d -> ", population[0].chromosome[i]+1);
+    }
+
+    printf("Umpire2: ");
+    for (int i = 0; i < population[0].chromosome.size(); ++i)
+    {
+        printf("%d -> ", get_the_other_venue(i, population[0].chromosome[i]+1));
     }
     printf("&& Fitness: %d\n", population[0].fitness);
 
