@@ -7,11 +7,10 @@ using namespace std;
 
 int main(){
 
-	int random_int = 0;
-	for (int i = 0; i < 1000; ++i)
-	{
-    	random_int += (rand()%2);
-    	printf("%d\n", random_int);
-	}
+	int ump1a = 0;
+	int ump1b = 1;
+
+	printf("ump2a: %d\n", -ump1a+1);
+	printf("ump2b: %d\n", -ump1b+1);
 
 }
