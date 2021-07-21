@@ -12,6 +12,7 @@ vector<vector <int>> dist;
 vector<vector <int>> opponents;
 
 # define POPULATION_SIZE 100
+# define MAX_ITER 200
 
 
 // clean a string from file
@@ -85,8 +86,9 @@ Individual Individual::mate(Individual par2) {
 
     vector<int> child_chromosome;
     int len = chromosome.size();
+    int nTeams = (chromosome.size()+2)/2;
 
-    cout << "fitness: " << fitness << endl;
+    // cout << "fitness: " << fitness << endl;
 
     for (int i = 0; i < len; i++)
     {
@@ -103,12 +105,13 @@ Individual Individual::mate(Individual par2) {
 
         // insert random gene if 0.90 < p
         else
-            child_chromosome.push_back(mutated_genes(len));
+            child_chromosome.push_back(mutated_genes(nTeams));
     }
 
     return Individual(child_chromosome);
 }
 
+// calculate the fitness of an individual by adding up its total distance
 int Individual::cal_fitness() {
     fitness = 0;
     int len = chromosome.size();
@@ -116,9 +119,19 @@ int Individual::cal_fitness() {
     for (int i = 0; i < len-1; i++)
     {
         fitness += dist[chromosome[i]][chromosome[i+1]];
+        printf("[%d][%d]%d", chromosome[i],chromosome[i+1], dist[chromosome[i]][chromosome[i+1]]);
+
+        printf("(%d) ", fitness);
     }
 
+    printf("-----> fitness: %d\n", fitness);
     return fitness;
+}
+
+// overload operator < to easily sort by fitness
+bool operator<(const Individual &ind1, const Individual &ind2)
+{
+    return ind1.fitness < ind2.fitness;
 }
 
 
@@ -187,23 +200,62 @@ int main(int argc, char const *argv[]){
         population.push_back(Individual(gnome));
     }
 
-    for (int i = 0; i < nRounds; ++i)
-        cout << population[0].chromosome[i] << ", ";
-    
-    cout << endl;
-    for (int i = 0; i < nRounds; ++i)
-        cout << population[1].chromosome[i] << ", ";
-    cout << endl;
-    
-    
-    Individual child = population[0].mate(population[1]);
-    
-    for (int i = 0; i < nRounds; ++i)
-        cout << child.chromosome[i] << ", ";
-    
-    cout << endl << population[0].fitness << endl;
-    cout << population[1].fitness << endl;
-    cout << child.fitness << endl;
+    int current_iter = 0;
+
+    while(current_iter <= MAX_ITER) {
+        
+        sort( population.begin(), population.end());
+
+        // generate a new generation
+        vector<Individual> new_generation;
+
+
+        // Elitism, 10% of best population goes to the next generation
+        int s = (10 * POPULATION_SIZE) / 100;
+        for (int i = 0; i < s; i++)
+            new_generation.push_back( population[i] );
+
+
+        // Mate the 50% of the remaining population
+        s = (90 * POPULATION_SIZE) / 100;
+        for (int i = 0; i < s; i++)
+        {
+            int len = population.size();
+            
+            int r = random_num(0, 50);
+            Individual parent1 = population[r];
+            
+            r = random_num(0, 50);
+            Individual parent2 = population[r];
+
+            Individual child = parent1.mate(parent2);
+            new_generation.push_back( child );
+        }
+        population = new_generation;
+
+        current_iter++;
+
+
+        printf("Generation: %d && ", current_iter);
+        printf("Sequence: ");
+        for (int i = 0; i < population[0].chromosome.size(); ++i)
+        {
+            printf("%d , ", population[0].chromosome[i]);
+        }
+        printf(" && Fitness: %d\n", population[0].fitness);
+
+        //////
+        if (population[0].fitness < 0) return 0;
+    }
+
+    printf("Generation: %d\n", current_iter);
+    printf("Sequence: ");
+    for (int i = 0; i < population[0].chromosome.size(); ++i)
+    {
+        printf("%d -> ", population[0].chromosome[i]);
+    }
+    printf("Fitness: %d\n", population[0].fitness);
+
 
 
     return 0;
