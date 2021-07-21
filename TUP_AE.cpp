@@ -2,12 +2,16 @@
 #include <iostream>
 #include <regex>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
 vector<vector <int>> dist;
 vector<vector <int>> opponents;
 vector<vector <int>> home_venues;
+int q1;
+int q2;
+
 
 # define POPULATION_SIZE 100
 # define MAX_ITER 200
@@ -41,6 +45,49 @@ int* tokenize(string line, int nTeams) {
     return dist_values;
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+// get the the corresponding home venue for the umpire2 in a certain round n
+int get_the_other_venue(int round_n, int ump1) { 
+
+    if (home_venues[round_n][0] == ump1)
+        return home_venues[round_n][1];
+
+    return home_venues[round_n][0];
+}
+
+
+// each umpire must visit each venue at least once
+bool home_venue_constraint(vector<int> umpire1) {
+
+    vector<int> umpire2;
+
+    for (int i = 0; i < umpire1.size(); ++i)
+        umpire2.push_back( get_the_other_venue(i, umpire1[i]+1)-1 );
+
+    
+    for (int i = 0; i < dist.size(); ++i)
+        if(not (find(umpire1.begin(), umpire1.end(), i) != umpire1.end()) or  
+           not (find(umpire2.begin(), umpire2.end(), i) != umpire2.end()) ){
+
+            return false;
+        }
+
+    return true;
+}
+
+
+bool verify_q1(vector<int> umpire1, vector<int> umpire2) {
+    
+    for (int i = 0; i < umpire1.size(); ++i)
+    {
+        return false;
+    }
+
+    return false;
+}
 
 // generate a random number
 int random_num(int start, int end) {
@@ -66,21 +113,11 @@ vector<int> create_gnome(int nTeams) {
 }
 
 
-int get_the_other_venue(int round_n, int ump1) { /////////////////////////////////////////////////// TODO
-
-    // int ump2 = -ump1 + 1; // get the alternate home venue
-
-
-    if (home_venues[round_n][0] == ump1)
-        return home_venues[round_n][1];
-
-    return home_venues[round_n][0];
-}
-
 // class to represent an individual from in a population
 class Individual {
 public: 
     vector<int> chromosome;
+    vector<int> chromosome2;
     int fitness;
     Individual (vector<int> chromosome);
     Individual mate(Individual parent2);
@@ -91,6 +128,11 @@ public:
 Individual::Individual(vector<int> chromosome) {
     this-> chromosome = chromosome;
     fitness = cal_fitness();
+
+    for (int i = 0; i < chromosome.size(); ++i)
+    {
+        chromosome2.push_back( get_the_other_venue(i, chromosome[i]+1)-1 );
+    }
 }
 
 // mate 2 individuals: parent1.mate(parent2)
@@ -134,12 +176,16 @@ int Individual::cal_fitness() {
         fitness += dist[chromosome[i]][chromosome[i+1]];
 
         // Umpire 2
-        int ump2_start = get_the_other_venue(i, chromosome[i]+1);
-        int ump2_end = get_the_other_venue(i, chromosome[i+1]+1);
+        int ump2_start = get_the_other_venue(i, chromosome[i]+1)-1;
+        int ump2_end = get_the_other_venue(i, chromosome[i+1]+1)-1;
 
         fitness += dist[ump2_start][ump2_end];
+
     }
-    
+
+    if (not home_venue_constraint(chromosome))
+        fitness += 100000;
+
     return fitness;
 }
 
@@ -174,7 +220,7 @@ int main(int argc, char const *argv[]){
     int q1, q2, nIter;
 
     // temporary
-    string filename = "instancias/umps4.txt";
+    string filename = "instancias/umps10.txt";
     //
 
 
@@ -279,38 +325,27 @@ int main(int argc, char const *argv[]){
         {
             printf("%d , ", population[0].chromosome[i]);
         }
-        int sum = 0;
-        for (int i = 0; i < population.size(); ++i)
-        {
-            sum += population[i].fitness;
-        }
-        printf(" && Gen total fitness: %d\n", sum);
+        
+        printf(" && Fitness: %d\n", population[0].fitness);
 
 
     }
 
-    printf("Generation: %d && ", current_iter);
-    printf("Umpire1: ");
+    printf("\nGeneration: %d\n~~~~~~~~~~~~~~~~", current_iter);
+    printf("\nUmpire1: ");
     for (int i = 0; i < population[0].chromosome.size(); ++i)
     {
         printf("%d -> ", population[0].chromosome[i]+1);
     }
 
-    printf("Umpire2: ");
+    printf("\nUmpire2: ");
     for (int i = 0; i < population[0].chromosome.size(); ++i)
     {
         printf("%d -> ", get_the_other_venue(i, population[0].chromosome[i]+1));
     }
-    printf("&& Fitness: %d\n", population[0].fitness);
+    printf("\nFitness: %d\n", population[0].fitness);
 
 
 
     return 0;
 }
-
-
-
-
-
-
-
