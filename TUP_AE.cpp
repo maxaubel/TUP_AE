@@ -13,27 +13,6 @@ vector<vector <int>> opponents;
 
 # define POPULATION_SIZE 100
 
-int random_num(int start, int end) {
-    int range = (end - start) + 1;
-    int random_int = start + (rand()%range);
-    return random_int;
-}
-
-int mutated_genes(int nTeams) {
-    int r = random_num(0, nTeams-1);
-    return r;
-}
-
-// create a chromosome (random sequence of genes)
-int* create_gnome(int nTeams) {
-    int nRounds = 2*nTeams - 2;
-    int* gnome = new int[nRounds];
-    for (int i = 0; i < nRounds; ++i)
-        gnome[i] = mutated_genes(nRounds);
-
-    return gnome;
-
-}
 
 // clean a string from file
 string str_cleaner(string line) {
@@ -62,65 +41,82 @@ int* tokenize(string line, int nTeams) {
 
     return dist_values;
 }
+// generate a random number
+int random_num(int start, int end) {
+    int range = (end - start) + 1;
+    int random_int = start + (rand()%range);
+    return random_int;
+}
+
+// generate a gene
+int mutated_genes(int nTeams) {
+    int r = random_num(0, nTeams-1);
+    return r;
+}
+
+// create a chromosome (random sequence of genes)
+vector<int> create_gnome(int nTeams) {
+    int nRounds = 2*nTeams - 2;
+    vector<int> gnome;
+    for (int i = 0; i < nRounds; ++i)
+        gnome.push_back(mutated_genes(nTeams));
+
+    return gnome;
+}
 
 // class to represent an individual from in a population
 class Individual {
 public: 
-    int* chromosome;
+    vector<int> chromosome;
     int fitness;
-    Individual (int* chromosome, int nRounds);
+    Individual (vector<int> chromosome);
     Individual mate(Individual parent2);
     int cal_fitness();
-    int nRounds;
 };
 
 // initialize an individual with its own chromosome
-Individual::Individual(int* chromosome, int nRounds) {
+Individual::Individual(vector<int> chromosome) {
     this-> chromosome = chromosome;
     fitness = cal_fitness();
-    this-> nRounds = nRounds;
 }
 
+// mate 2 individuals: parent1.mate(parent2)
 Individual Individual::mate(Individual par2) {
-    // int len =  sizeof(chromosome)/sizeof(chromosome[0]);
-    int* child_chromosome = new int[nRounds];  
 
-    for (int i = 0; i < nRounds; i++)
+    vector<int> child_chromosome;
+    int len = chromosome.size();
+
+    cout << "fitness: " << fitness << endl;
+
+    for (int i = 0; i < len; i++)
     {
         // random probability
         float p = random_num(0, 100) / 100;
 
         // insert gene from parent 1 if p<0.45
         if (p < 0.45)
-            child_chromosome[i] = chromosome[i];
+            child_chromosome.push_back(chromosome[i]);
 
         // insert gene from parent 2 if 0.45 < p < 0.90
         else if (p < 0.90)
-            child_chromosome[i] = par2.chromosome[i];
+            child_chromosome.push_back(par2.chromosome[i]);            
 
         // insert random gene if 0.90 < p
         else
-            child_chromosome[i] = mutated_genes(nRounds);
+            child_chromosome.push_back(mutated_genes(len));
     }
 
-    return Individual(child_chromosome, nRounds);
+    return Individual(child_chromosome);
 }
 
 int Individual::cal_fitness() {
-    int fitness = 0;
-    int nTeams = (nRounds+2) / 2;
+    fitness = 0;
+    int len = chromosome.size();
 
-    for (int i = 0; i < nTeams; ++i)
+    for (int i = 0; i < len-1; i++)
     {
-        for (int j = 0; j < nTeams; ++j)
-        {
-            cout << dist[i][j] << ", ";
-        }
-        cout << endl;
-        fitness ++;
+        fitness += dist[chromosome[i]][chromosome[i+1]];
     }
-
-
 
     return fitness;
 }
@@ -144,8 +140,6 @@ int main(int argc, char const *argv[]){
     fgets(buffer, buffer_size, fp);
     int nTeams = stoi(regex_replace(buffer, regex("[^0-9]*([0-9]+).*"), string("$1")));
     int nRounds = 2*nTeams-2;
-    //int dist[nTeams][nTeams];
-    //int opponents[nRounds][nTeams];
     
 
     while( fgets(buffer, buffer_size, fp) ){
@@ -159,7 +153,6 @@ int main(int argc, char const *argv[]){
                 int* one_line = tokenize(buffer, nTeams);
                 for (int j = 0; j < nTeams; ++j)
                     v.push_back(one_line[j]);
-                    //dist[i][j] = one_line[j];
                 dist.push_back(v);
             }
         }
@@ -173,7 +166,6 @@ int main(int argc, char const *argv[]){
                 int* one_line = tokenize(buffer, nTeams);
                 for (int j = 0; j < nTeams; ++j)
                     v.push_back(one_line[j]);
-                    //opponents[i][j] = one_line[j];
                 opponents.push_back(v);
             }
         }
@@ -181,16 +173,8 @@ int main(int argc, char const *argv[]){
     fclose(fp);
 
 
-    for (int i = 0; i < opponents.size(); ++i)
-    {
-        for (int j = 0; j < opponents[i].size(); ++j)
-        {
-            cout << opponents[i][j] << " ";
-        }
-        cout << endl;
-    }
 
-    return 0;
+    //actual AE
 
     int generation = 0;
     srand((unsigned)(time(0)));
@@ -199,8 +183,8 @@ int main(int argc, char const *argv[]){
     // Generate first generation
     for (int i = 0; i < POPULATION_SIZE; ++i)
     {
-        int* gnome = create_gnome(nTeams);
-        population.push_back(Individual(gnome, nRounds));
+        vector<int> gnome = create_gnome(nTeams);
+        population.push_back(Individual(gnome));
     }
 
     for (int i = 0; i < nRounds; ++i)
@@ -217,6 +201,9 @@ int main(int argc, char const *argv[]){
     for (int i = 0; i < nRounds; ++i)
         cout << child.chromosome[i] << ", ";
     
+    cout << endl << population[0].fitness << endl;
+    cout << population[1].fitness << endl;
+    cout << child.fitness << endl;
 
 
     return 0;
