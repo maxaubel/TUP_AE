@@ -1,16 +1,24 @@
 #include <iostream>
-
-//#include <string>
-//#include <string.h>
-//#include <algorithm>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 int main(){
 
-	int ump1a = 0;
-	int ump1b = 1;
+	vector<int> v = {0, 1, 2, 3, 4};
 
-	printf("ump2a: %d\n", -ump1a+1);
-	printf("ump2b: %d\n", -ump1b+1);
+
+	for (int i = 0; i < v.size(); ++i)
+	{
+		if(std::find(v.begin(), v.end(), i) != v.end()) {
+			printf("yes\n");
+		} else {
+		    printf("no :(\n");
+		    break;
+		}
+		/* code */
+	}
+
+	return 0;
 
 }
