@@ -358,7 +358,8 @@ int main(int argc, char const *argv[]){
         }*/
         
         printf(" && Fitness: %d\n", population[0].fitness);
-
+        printf("q1 constraint?: %s\n", (verify_q1(population[0].chromosome, population[0].chromosome2) ? "true" : "false"));
+        printf("home venue constraint?: %s\n", (home_venue_constraint(population[0].chromosome) ? "true" : "false"));
 
     }
 
