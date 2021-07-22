@@ -13,10 +13,24 @@ int q1;
 int q2;
 
 
-# define POPULATION_SIZE 10000
-# define MAX_ITER 20000
-# define HOME_VENUE_PENALIZATION 100
-# define Q1_PENALIZATION 5000
+# define POPULATION_SIZE 1000
+# define MAX_ITER 10000
+# define HOME_VENUE_PENALIZATION 100000
+# define Q1_PENALIZATION 100000
+
+
+/*
+* for nTeams <= 18:
+    home venue penalization and q1 values: 10000
+for nTeams <= 20:
+    home venue penalization and q1 values: 100000
+    Max_iter = 10000 o más
+
+for nTeams <= 30:
+    home venue penalization and q1 values: 
+    Max_iter = 
+
+*/
 
 
 // clean a string from file
@@ -81,29 +95,38 @@ bool home_venue_constraint(vector<int> umpire1) {
 }
 
 void printf_vector(vector<int> v) {
-    for (int i = 0; i < v.size()-1; ++i)
+    int i=0;
+    for (; i < v.size()-1; i++)
     {
         printf("%d, ", v[i]);
     }
-    printf("\n");
+    printf("%d\n", v[i]);
     return;
 }
 
 
-bool verify_q1(vector<int> umpire) { //////////// still not working
+int verify_q1(vector<int> umpire) { //////////// still not working
     
+    int penalization = 0;
     for (int i = 0; i < umpire.size(); ++i)
     {
         for (int j = 1; j <= q1 and i+j<umpire.size(); ++j)
         {   
             if (umpire[i] == umpire[i+j]) {
 
-                return false;
+                penalization += Q1_PENALIZATION;
+
+                // return false;
             }
         }
     }
+    /*if (Q1_PENALIZATION != 0) {
+        printf("penalization: %d\n", penalization);
+        printf_vector(umpire);
+    }*/
 
-    return true;
+    return penalization;
+    //return true;
 }
 
 // generate a random number
@@ -199,15 +222,19 @@ int Individual::cal_fitness() {
 
     }
 
+    fitness += verify_q1(chromosome);
+    fitness += verify_q1(chromosome2);
+
     if ( not home_venue_constraint(chromosome) )
         fitness += HOME_VENUE_PENALIZATION;
+/*
 
     if ( not verify_q1(chromosome) )
         fitness += Q1_PENALIZATION;
     else printf("Q1 for UMP1 TRUE!!!\n");
     if ( not verify_q1(chromosome2) )
 	fitness += Q1_PENALIZATION;
-
+*/
     return fitness;
 }
 
@@ -242,8 +269,8 @@ int main(int argc, char const *argv[]){
     int nIter;
 
     // temporary
-    string filename = "instancias/umps10.txt";
-    q1 = 2;
+    string filename = "instancias/umps30.txt";
+    q1 = 1;
     q2 = 2;
     //
 
@@ -362,12 +389,22 @@ int main(int argc, char const *argv[]){
             printf("%d , ", population[0].chromosome[i]);
         }*/
         
-        printf("Fitness: %d && ", population[0].fitness);
-        printf("UMP1 q1?: %s && ", (verify_q1(population[0].chromosome) ? "true" : "false"));
-        printf("UMP2 q1?: %s && ", (verify_q1(population[0].chromosome2) ? "true" : "false"));
- 
+        printf("Best Fitness: %d && ", population[0].fitness);
+        int sum = 0;
+        for (int i = 0; i < population.size(); ++i)
+        {
+            sum += population[i].fitness;
+        }
+        printf("Total Gen Fitness: %d && ", sum);
+        
 
-	printf("home venue constraint?: %s\n\n", (home_venue_constraint(population[0].chromosome) ? "true" : "false"));
+        /*printf("UMP1 q1?: %s && ", (verify_q1(population[0].chromosome) ? "true" : "false"));
+        printf("UMP2 q1?: %s && ", (verify_q1(population[0].chromosome2) ? "true" : "false"));*/
+ 
+        printf("UMP1 q1?: %d && ", verify_q1(population[0].chromosome));
+        printf("UMP2 q1?: %d && ", verify_q1(population[0].chromosome2));
+
+	   printf("home venue constraint?: %s\n", (home_venue_constraint(population[0].chromosome) ? "true" : "false"));
 
     }
 
@@ -381,13 +418,17 @@ int main(int argc, char const *argv[]){
     printf("\nUmpire2: ");
     printf_vector(population[0].chromosome2);
 
-    printf("\nFitness: %d", population[0].fitness);
+    printf("\nFitness: %d\n", population[0].fitness);
 
-    printf("UMP1 q1?: %s && ", (verify_q1(population[0].chromosome) ? "true" : "false"));
-    printf("UMP2 q1?: %s && ", (verify_q1(population[0].chromosome2) ? "true" : "false"));
+    /*printf("UMP1 q1?: %s && ", (verify_q1(population[0].chromosome) ? "true" : "false"));
+    printf("UMP2 q1?: %s && ", (verify_q1(population[0].chromosome2) ? "true" : "false"));*/
+
+    printf("UMP1 q1?: %d\n", verify_q1(population[0].chromosome));
+    printf("UMP2 q1?: %d\n", verify_q1(population[0].chromosome2));
+
  
  
-    printf("home venue constraint?: %s\n\n", (home_venue_constraint(population[0].chromosome) ? "true" : "false"));
+    printf("home venue constraint?: %s\n", (home_venue_constraint(population[0].chromosome) ? "true" : "false"));
 
     return 0;
 }
