@@ -373,7 +373,7 @@ int main(int argc, char const *argv[]){
     printf("\nUmpire2: ");
     printf_vector(population[0].chromosome2);
 
-    printf("\nFitness: %d\n", population[0].fitness);
+    printf("\nFitness: %d", population[0].fitness);
 
 
     printf("q1 constraint?: %s", (verify_q1(population[0].chromosome, population[0].chromosome2) ? "true" : "false"));
