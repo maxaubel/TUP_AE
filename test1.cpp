@@ -5,19 +5,17 @@ using namespace std;
 
 int main(){
 
-	vector<int> v = {0, 1, 2, 3, 4};
-
+	vector<int> v = {0, 0, 2, 3, 4, 1, 2, 3};
+	int q1 = 2;
 
 	for (int i = 0; i < v.size(); ++i)
-	{
-		if(std::find(v.begin(), v.end(), i) != v.end()) {
-			printf("yes\n");
-		} else {
-		    printf("no :(\n");
-		    break;
-		}
-		/* code */
-	}
+    {
+        for (int j = 1; j <= q1 and i+j<v.size(); ++j)
+        {
+        	printf("i: %d j: %d v[i=%d]: >%d<  && v[i+j=%d]: >%d<\n", i, j, i, v[i], i+j, v[i+j]);
+            if (v[i] == v[i+j]) printf("fuck\n");
+        }
+    }
 
 	return 0;
 
