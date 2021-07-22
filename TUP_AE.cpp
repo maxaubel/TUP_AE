@@ -270,7 +270,7 @@ int main(int argc, char const *argv[]){
 
     // temporary
     string filename = "instancias/umps30.txt";
-    q1 = 1;
+    q1 = 2;
     q2 = 2;
     //
 
