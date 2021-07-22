@@ -16,7 +16,7 @@ int q2;
 # define POPULATION_SIZE 10000
 # define MAX_ITER 20000
 # define HOME_VENUE_PENALIZATION 100
-# define Q1_PENALIZATION 500
+# define Q1_PENALIZATION 5000
 
 
 // clean a string from file
@@ -204,6 +204,7 @@ int Individual::cal_fitness() {
 
     if ( not verify_q1(chromosome) )
         fitness += Q1_PENALIZATION;
+    else printf("Q1 for UMP1 TRUE!!!\n");
     if ( not verify_q1(chromosome2) )
 	fitness += Q1_PENALIZATION;
 
