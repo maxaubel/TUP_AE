@@ -13,13 +13,17 @@ int q1;
 int q2;
 
 
-# define POPULATION_SIZE 1000
-# define MAX_ITER 10000
-# define HOME_VENUE_PENALIZATION 100000
-# define Q1_PENALIZATION 100000
+# define POPULATION_SIZE 10
+# define HOME_VENUE_PENALIZATION 5000
+# define Q1_PENALIZATION 10000
 
 
 /*
+* for nTeams = 4 and q1 = 1:
+    pop_size: 50
+    home venue penalization and q1 values: 10000
+
+
 * for nTeams <= 18:
     home venue penalization and q1 values: 10000
 for nTeams <= 20:
@@ -65,35 +69,6 @@ int* tokenize(string line, int nTeams) {
 
 
 
-// get the the corresponding home venue for the umpire2 in a certain round n
-int get_the_other_venue(int round_n, int ump1) { 
-
-    if (home_venues[round_n][0] == ump1)
-        return home_venues[round_n][1];
-
-    return home_venues[round_n][0];
-}
-
-
-// each umpire must visit each venue at least once
-bool home_venue_constraint(vector<int> umpire1) {
-
-    vector<int> umpire2;
-
-    for (int i = 0; i < umpire1.size(); ++i)
-        umpire2.push_back( get_the_other_venue(i, umpire1[i]+1)-1 );
-
-    
-    for (int i = 0; i < dist.size(); ++i)
-        if(not (find(umpire1.begin(), umpire1.end(), i) != umpire1.end()) or  
-           not (find(umpire2.begin(), umpire2.end(), i) != umpire2.end()) ){
-
-            return false;
-        }
-
-    return true;
-}
-
 void printf_vector(vector<int> v) {
     int i=0;
     for (; i < v.size()-1; i++)
@@ -104,15 +79,51 @@ void printf_vector(vector<int> v) {
     return;
 }
 
+// each umpire must visit each venue at least once
+int home_venue_constraint(vector<vector<int>> chromosome) {
 
-int verify_q1(vector<int> umpire) { //////////// still not working
+
+    vector< vector<int> > chromosome_T(chromosome[0].size(), vector<int>(chromosome.size()));
+
+    for (vector<int>::size_type i(0); i < chromosome[0].size(); ++i)
+        for (vector<int>::size_type j(0); j < chromosome.size(); ++j)
+            chromosome_T[i][j] = chromosome[j][i];
+
+    // printf("chromosome_T.size(): %d\n", chromosome_T.size());
+    // printf("chromosome_T[0].size(): %d\n", chromosome_T[0].size());
+
+    int n = 0; // number of fails to meet the constraints
+
+    for (int i = 0; i < chromosome_T.size(); ++i)
+    {
+        for (int j = 1; j <= dist.size(); ++j)
+        {   
+            //printf("is %d in the vector: ", j);
+            //printf_vector(chromosome_T[i]);
+
+            if(not (find(chromosome_T[i].begin(), chromosome_T[i].end(), j) != chromosome_T[i].end()) )
+                n++;
+        }
+    }
+
+    return n*HOME_VENUE_PENALIZATION;
+
+
+}
+
+
+
+int verify_q1(vector<vector<int>> chromosome) {
     
     int penalization = 0;
-    for (int i = 0; i < umpire.size(); ++i)
+
+
+
+    for (int i = 0; i < chromosome.size(); ++i)
     {
-        for (int j = 1; j <= q1 and i+j<umpire.size(); ++j)
+        for (int j = 1; j <= q1 and i+j<chromosome.size(); ++j)
         {   
-            if (umpire[i] == umpire[i+j]) {
+            if (chromosome[i] == chromosome[i+j]) {
 
                 penalization += Q1_PENALIZATION;
 
@@ -120,6 +131,7 @@ int verify_q1(vector<int> umpire) { //////////// still not working
             }
         }
     }
+
     /*if (Q1_PENALIZATION != 0) {
         printf("penalization: %d\n", penalization);
         printf_vector(umpire);
@@ -136,79 +148,103 @@ int random_num(int start, int end) {
     return random_int;
 }
 
-int mutated_genes(vector<int> round) {
-    int home_venue = round[(rand()%2)]-1;
-
-    return home_venue;
+vector<int> mutated_genes(vector<int> round) {
+    vector<int> round_c = round;
+    
+    random_shuffle(round_c.begin(), round_c.end());
+   
+    return round_c;
 }
 
 // create a chromosome (random sequence of genes)
-vector<int> create_gnome(int nTeams) {
-    int nRounds = 2*nTeams - 2;
-    vector<int> gnome;
-    for (int i = 0; i < nRounds; ++i)
-        gnome.push_back(mutated_genes(home_venues[i]));
+vector<vector<int>> create_gnome() {
+    vector<vector<int>> gnome = home_venues;
+    auto rng = std::default_random_engine {};
+
+    for (int i = 0; i < gnome.size(); ++i) {
+        std::shuffle(std::begin(gnome[i]), std::end(gnome[i]), rng);
+
+        //random_shuffle(gnome[i].begin(), gnome[i].end());
+
+        // gnome.push_back(mutated_genes(home_venues[i]));
+    }
 
     return gnome;
 }
 
-
 // class to represent an individual from in a population
 class Individual {
 public: 
-    vector<int> chromosome;
-    vector<int> chromosome2;
+    vector<vector<int>> chromosome;
     int fitness;
-    Individual (vector<int> chromosome);
+    Individual (vector<vector<int>> chromosome);
     Individual mate(Individual parent2);
     int cal_fitness();
+    void print_umpires();
 };
 
 // initialize an individual with its own chromosome
-Individual::Individual(vector<int> chromosome) {
+Individual::Individual(vector<vector<int>> chromosome) {
     this-> chromosome = chromosome;
-
-    for (int i = 0; i < chromosome.size(); ++i)
-        chromosome2.push_back( get_the_other_venue(i, chromosome[i]+1)-1 );
-    
     fitness = cal_fitness();
 }
 
 // mate 2 individuals: parent1.mate(parent2)
 Individual Individual::mate(Individual par2) {
 
-    vector<int> child_chromosome;
+    vector<vector<int>> child_chromosome;
     int len = chromosome.size();
     int nTeams = (chromosome.size()+2)/2;
 
     // cout << "fitness: " << fitness << endl;
 
+
     for (int i = 0; i < len; i++)
     {
         // random probability
-        float p = random_num(0, 100) / 100;
+        float p = random_num(0, 100);
 
         // insert gene from parent 1 if p<0.45
-        if (p < 0.45)
+        if (p < 45) {
             child_chromosome.push_back(chromosome[i]);
+        }
 
         // insert gene from parent 2 if 0.45 < p < 0.90
-        else if (p < 0.90)
-            child_chromosome.push_back(par2.chromosome[i]);            
+        else if (p < 90){
+            child_chromosome.push_back(par2.chromosome[i]);
+        }
 
         // insert random gene if 0.90 < p
-        else
+        else{
             child_chromosome.push_back(mutated_genes(home_venues[i]));
+        }
     }
+
 
     return Individual(child_chromosome);
 }
 
 // calculate the fitness of an individual by adding up its total distance
+// constraints are considered as a fitness penalization
 int Individual::cal_fitness() {
     fitness = 0;
     int len = chromosome.size();
 
+    for (int i = 0; i < chromosome[0].size(); ++i)
+    {
+        for (int j = 0; j < chromosome.size()-1; ++j)
+        {
+            fitness += dist[ chromosome[j][i]-1 ][ chromosome[j+1][i]-1 ];
+        }
+    }
+
+    fitness += home_venue_constraint(chromosome);
+
+
+
+    return fitness;
+
+/*
     for (int i = 0; i < len-1; i++) {
         
         // Umpire 1
@@ -223,10 +259,9 @@ int Individual::cal_fitness() {
     }
 
     fitness += verify_q1(chromosome);
-    fitness += verify_q1(chromosome2);
 
     if ( not home_venue_constraint(chromosome) )
-        fitness += HOME_VENUE_PENALIZATION;
+        fitness += HOME_VENUE_PENALIZATION; */
 /*
 
     if ( not verify_q1(chromosome) )
@@ -235,7 +270,16 @@ int Individual::cal_fitness() {
     if ( not verify_q1(chromosome2) )
 	fitness += Q1_PENALIZATION;
 */
-    return fitness;
+}
+
+void Individual::print_umpires() {
+    for (int i = 0; i < chromosome[0].size(); ++i)
+    {
+        printf("\nUmpire %d:   ", i);
+        for (int j = 0; j < chromosome.size(); ++j)
+            printf("%d ", chromosome[j][i]);
+    }
+    return;
 }
 
 // overload operator < to easily sort by fitness
@@ -248,7 +292,7 @@ bool operator<(const Individual &ind1, const Individual &ind2)
 // RESTRICTIONS
 vector<vector<int>> generate_home_venues() {
     
-    vector<vector <int>> home_venues; // the 2 home venues for each round
+    vector<vector <int>> home_venues; // the nUmpires home venues for each round
     
     for (int i = 0; i < opponents.size(); ++i) {
         vector<int> round;
@@ -260,7 +304,6 @@ vector<vector<int>> generate_home_venues() {
         home_venues.push_back(round);
     }
 
-
     return home_venues;
 }
 
@@ -268,11 +311,15 @@ int main(int argc, char const *argv[]){
 
     int nIter;
 
-    // temporary
-    string filename = "instancias/umps30.txt";
-    q1 = 2;
-    q2 = 2;
-    //
+    if (argc != 5) {
+        printf("Incorrect number of parameters. Expected 5, received %d!!!\n\n", argc);
+        return -1;
+    }
+
+    string filename = argv[1];
+    q1 = stoi( argv[2] );
+    q2 = stoi( argv[3] );
+    nIter = stoi( argv[4] );
 
 
 
@@ -284,14 +331,11 @@ int main(int argc, char const *argv[]){
     fgets(buffer, buffer_size, fp);
     int nTeams = stoi(regex_replace(buffer, regex("[^0-9]*([0-9]+).*"), string("$1")));
     int nRounds = 2*nTeams-2;
-    
+    int nUmpires = static_cast<int>(ceil(nTeams/2));
 
-    while( fgets(buffer, buffer_size, fp) ){
-
-        if( buffer[0] == 'd' ){
-
-            for (int i = 0; i < nTeams; ++i)
-            {
+    while( fgets(buffer, buffer_size, fp) ) {
+        if( buffer[0] == 'd' ) {
+            for (int i = 0; i < nTeams; ++i) {
                 vector<int> v;
                 fgets(buffer, buffer_size, fp);
                 int* one_line = tokenize(buffer, nTeams);
@@ -301,10 +345,8 @@ int main(int argc, char const *argv[]){
             }
         }
 
-        if( buffer[0] == 'o' ){
-        
-            for (int i = 0; i < nRounds; ++i)
-            {
+        if( buffer[0] == 'o' ) {
+            for (int i = 0; i < nRounds; ++i) {
                 vector<int> v;
                 fgets(buffer, buffer_size, fp);
                 int* one_line = tokenize(buffer, nTeams);
@@ -317,38 +359,34 @@ int main(int argc, char const *argv[]){
     fclose(fp);
 
     // tuples of home venues for each round
-    home_venues = generate_home_venues();
+    home_venues = generate_home_venues(); // OK for nUmpires
 
 
-    //actual AE
+
+
+    // Actual AE:
 
     int generation = 0;
     srand((unsigned)(time(0)));
     vector<Individual> population;
 
 
+
     // Generate first generation
     for (int i = 0; i < POPULATION_SIZE; ++i)
     {
-        vector<int> gnome = create_gnome(nTeams);
+        vector<vector<int>> gnome = create_gnome();
         population.push_back(Individual(gnome));
 
-/*        printf("\n");
-        for (int j = 0; j < population[0].chromosome.size(); ++j)
-        {
-            printf("%d, ", population[0].chromosome[j]+1);
-        }
-        printf("\n");
-        for (int j = 0; j < population[0].chromosome.size(); ++j)
-        {
-            printf("%d, ", population[0].chromosome2[j]+1);
-        }
-  */  }
+
+    }
+
+
 
 
     int current_iter = 0;
 
-    while(current_iter <= MAX_ITER) {
+    while(current_iter <= nIter) {
         
         sort( population.begin(), population.end());
 
@@ -366,12 +404,12 @@ int main(int argc, char const *argv[]){
         s = (90 * POPULATION_SIZE) / 100;
         for (int i = 0; i < s; i++)
         {
-            int len = population.size();
+            int len = population.size()*0.5;
             
-            int r = random_num(0, 50);
+            int r = random_num(0, len);
             Individual parent1 = population[r];
             
-            r = random_num(0, 50);
+            r = random_num(0, len);
             Individual parent2 = population[r];
 
             Individual child = parent1.mate(parent2);
@@ -382,53 +420,68 @@ int main(int argc, char const *argv[]){
         current_iter++;
 
 
-        printf("Generation: %d && ", current_iter);
-        /*printf("Sequence: ");
-        for (int i = 0; i < population[0].chromosome.size(); ++i)
+        printf("\nGeneration: %d && ", current_iter);
+        
+        //vector<vector<int>> chromosome = {{1, 2}, {3, 1}, {1, 3}, {3, 4}, {4, 2}, {2, 4}} ;
+        //population[0] = chromosome;
+
+        int i = 0;
+        printf("Fitness individual %d: %d, home_venue: %d", i, population[i].fitness, home_venue_constraint(population[i].chromosome));
+        //population[i].print_umpires();
+
+        /*for (int i = 0; i < population.size(); ++i)
         {
-            printf("%d , ", population[0].chromosome[i]);
+            printf("\n\nFitness individual %d: %d, home_venue: %d", i, population[i].fitness, home_venue_constraint(population[i].chromosome));
+            population[i].print_umpires();
+
         }*/
-        
-        printf("Best Fitness: %d && ", population[0].fitness);
-        int sum = 0;
-        for (int i = 0; i < population.size(); ++i)
-        {
-            sum += population[i].fitness;
+
+        if (false){//current_iter % 10 == 0) {
+            /*printf("Sequence: ");
+            for (int i = 0; i < population[0].chromosome.size(); ++i)
+            {
+                printf("%d , ", population[0].chromosome[i]);
+            }*/
+
+
+            
+            printf("Best Fitness: %d && ", population[0].fitness);
+
+            population[0].print_umpires();
+
+            int sum = 0;
+            for (int i = 0; i < population.size(); ++i)
+            {
+                sum += population[i].fitness;
+            }
+            printf("\nTotal Gen Fitness: %d && ", sum);
+            
         }
-        printf("Total Gen Fitness: %d && ", sum);
-        
-
-        /*printf("UMP1 q1?: %s && ", (verify_q1(population[0].chromosome) ? "true" : "false"));
-        printf("UMP2 q1?: %s && ", (verify_q1(population[0].chromosome2) ? "true" : "false"));*/
- 
-        printf("UMP1 q1?: %d && ", verify_q1(population[0].chromosome));
-        printf("UMP2 q1?: %d && ", verify_q1(population[0].chromosome2));
-
-	   printf("home venue constraint?: %s\n", (home_venue_constraint(population[0].chromosome) ? "true" : "false"));
-
     }
+    sort( population.begin(), population.end());
 
     printf("\nGeneration: %d\n~~~~~~~~~~~~~~~~", current_iter);
     
     printf("\nq1: %d", q1);
-    
-    printf("\nUmpire1: ");
-    printf_vector(population[0].chromosome);
-    
-    printf("\nUmpire2: ");
-    printf_vector(population[0].chromosome2);
 
-    printf("\nFitness: %d\n", population[0].fitness);
+    printf("\n\nFitness individual %d: %d", 0, population[0].fitness);
+    population[0].print_umpires();
+    /*
+    for (int i = 0; i < population.size(); ++i)
+    {
+        printf("\n\nFitness individual %d: %d", i, population[i].fitness);
+        population[i].print_umpires();
+    }*/
 
     /*printf("UMP1 q1?: %s && ", (verify_q1(population[0].chromosome) ? "true" : "false"));
     printf("UMP2 q1?: %s && ", (verify_q1(population[0].chromosome2) ? "true" : "false"));*/
 
-    printf("UMP1 q1?: %d\n", verify_q1(population[0].chromosome));
-    printf("UMP2 q1?: %d\n", verify_q1(population[0].chromosome2));
+    // printf("UMP1 q1?: %d\n", verify_q1(population[0].chromosome));
+    // printf("UMP2 q1?: %d\n", verify_q1(population[0].chromosome2));
 
  
  
-    printf("home venue constraint?: %s\n", (home_venue_constraint(population[0].chromosome) ? "true" : "false"));
+    printf("Home venue constraint?: %d\n", home_venue_constraint(population[0].chromosome));
 
     return 0;
 }

@@ -161,7 +161,7 @@ int main()
 		s = (90*POPULATION_SIZE)/100;
 		for(int i = 0;i<s;i++)
 		{
-			int len = population.size();
+			int len = population.size()/2;
 			int r = random_num(0, 50);
 			Individual parent1 = population[r];
 			r = random_num(0, 50);
