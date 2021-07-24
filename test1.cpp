@@ -63,7 +63,52 @@ int random_num(int start, int end) {
     return random_int;
 }
 
+int q1;
+#define Q1_PENALIZATION 100;
+
+int q1_constraint(vector<vector<int>> chromosome) {
+    
+    int penalization = 0;
+
+    vector< vector<int> > chromosome_T(chromosome[0].size(), vector<int>(chromosome.size()));
+
+    for (vector<int>::size_type i(0); i < chromosome[0].size(); ++i)
+        for (vector<int>::size_type j(0); j < chromosome.size(); ++j)
+            chromosome_T[i][j] = chromosome[j][i];
+
+    printf("chromosome_T.size(): %d\n", chromosome_T.size());
+    printf("chromosome_T[0].size(): %d\n", chromosome_T[0].size());
+
+    for (int i = 0; i < chromosome_T.size(); ++i)
+    {
+        printf("i: %d -> ", i);
+        printf_vector(chromosome_T[i]);
+
+        for (int j = 0; j < chromosome_T[i].size(); ++j)
+        {
+            for (int k = 1; k <= q1 and j+k<chromosome_T[i].size(); k++)
+            {   
+                printf("j: %d, k: %d\n", j, k);
+                printf("c_T[i]: %d, c_T[i+j]: %d\n", chromosome_T[i][j], chromosome_T[i][j+k]);
+                if (chromosome_T[i][j] == chromosome_T[i][j+k]) {
+                    printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n\n");
+                    penalization += Q1_PENALIZATION;
+                }
+            }
+
+        }
+    }
+    return penalization;
+}
+
 int main(){
+    q1 = 2;
+    vector<vector<int>> chromosome = {{1, 5}, {2, 4}, {3, 3}, {4, 2}, {5, 2}} ;
+    printf("q1?: %d\n", q1_constraint(chromosome));
+
+    return 0;
+
+
     srand((unsigned)(time(0)));
 
     int menor45 = 0;
@@ -87,17 +132,6 @@ int main(){
 
 
     return 0;
-
-
-
-
-
-    vector<vector<int>> chromosome = {{1, 5}, {2, 4}, {3, 3}, {4, 2}, {5, 1}} ;
-    printf("Home venue constraint?: %s\n", (home_venue_constraint(chromosome) ? "true" : "false"));
-
-    return 0;
-
-
 
 
 
