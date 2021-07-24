@@ -50,7 +50,6 @@ string str_cleaner(string line) {
 int* tokenize(string line, int nTeams) {
 
     line = str_cleaner(line);
-        
     string* parsed_line = new string[nTeams];
     int* dist_values = new int[nTeams];
     stringstream ssin(line);
@@ -67,16 +66,11 @@ int* tokenize(string line, int nTeams) {
     return dist_values;
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 void printf_vector(vector<int> v) {
     int i=0;
     for (; i < v.size()-1; i++)
-    {
         printf("%d, ", v[i]);
-    }
     printf("%d\n", v[i]);
     return;
 }
@@ -85,12 +79,12 @@ void printf_vector(vector<int> v) {
 int home_venue_constraint(vector<vector<int>> chromosome) {
 
     vector< vector<int> > chromosome_T(chromosome[0].size(), vector<int>(chromosome.size()));
+    int n = 0; // number of times where constraint is not met
 
     for (vector<int>::size_type i(0); i < chromosome[0].size(); ++i)
         for (vector<int>::size_type j(0); j < chromosome.size(); ++j)
             chromosome_T[i][j] = chromosome[j][i];
 
-    int n = 0; // number of times where constraint is not met
 
     for (int i = 0; i < chromosome_T.size(); ++i)
         for (int j = 1; j <= dist.size(); ++j)
@@ -105,7 +99,6 @@ int home_venue_constraint(vector<vector<int>> chromosome) {
 int q1_constraint(vector<vector<int>> chromosome) {
     
     int penalization = 0;
-
     vector< vector<int> > chromosome_T(chromosome[0].size(), vector<int>(chromosome.size()));
 
     for (vector<int>::size_type i(0); i < chromosome[0].size(); ++i)
@@ -125,36 +118,28 @@ int q1_constraint(vector<vector<int>> chromosome) {
 int q2_constraint(vector<vector<int>> chromosome) {
 
     int penalization = 0;
-
     vector< vector<int> > chromosome_T(chromosome[0].size(), vector<int>(chromosome.size()));
 
     for (vector<int>::size_type i(0); i < chromosome[0].size(); ++i)
         for (vector<int>::size_type j(0); j < chromosome.size(); ++j)
             chromosome_T[i][j] = chromosome[j][i];
 
-
     for (int i = 0; i < chromosome_T.size(); ++i)
     {
-        //printf_vector(chromosome_T[0]);
         for (int j = 0; j < chromosome_T[i].size(); ++j)
         {
             for (int k = 1; k <= q2 and j+k<chromosome_T[i].size(); k++)
             {   
                 int current_local = abs(chromosome_T[i][j]);
                 int current_visitor = abs(opponents[i][chromosome_T[i][j]-1]);
-
                 int future_local = abs(chromosome_T[i][j+k]);
                 int future_visitor = abs(opponents[i][chromosome_T[i][j+k]-1]);
 
-                //printf("i: %d, j: %d, k: %d -> ", i, j, k);
-                //printf("%d, %d, %d, %d\n", current_local, current_visitor, future_local, future_visitor);
-
-                if ((current_local == future_local) or
+                if ((current_local == future_local)   or
                     (current_local == future_visitor) or
                     (current_visitor == future_local) or
                     (current_visitor == future_visitor))
 
-                    //printf("failed!\n");
                     penalization += Q2_PENALIZATION;
 
             }
@@ -174,9 +159,7 @@ int random_num(int start, int end) {
 
 vector<int> mutated_genes(vector<int> round) {
     vector<int> round_c = round;
-    
     random_shuffle(round_c.begin(), round_c.end());
-   
     return round_c;
 }
 
@@ -187,8 +170,6 @@ vector<vector<int>> create_gnome() {
 
     for (int i = 0; i < gnome.size(); ++i) {
         std::shuffle(std::begin(gnome[i]), std::end(gnome[i]), rng);
-
-        //random_shuffle(gnome[i].begin(), gnome[i].end());
     }
 
     return gnome;
@@ -218,30 +199,23 @@ Individual Individual::mate(Individual par2) {
     int len = chromosome.size();
     int nTeams = (chromosome.size()+2)/2;
 
-    // cout << "fitness: " << fitness << endl;
-
-
     for (int i = 0; i < len; i++)
     {
         // random probability
         float p = random_num(0, 100);
 
         // insert gene from parent 1 if p<0.45
-        if (p < 45) {
+        if (p < 45)
             child_chromosome.push_back(chromosome[i]);
-        }
 
         // insert gene from parent 2 if 0.45 < p < 0.90
-        else if (p < 90){
+        else if (p < 90)
             child_chromosome.push_back(par2.chromosome[i]);
-        }
 
         // insert random gene if 0.90 < p
-        else{
+        else
             child_chromosome.push_back(mutated_genes(home_venues[i]));
-        }
     }
-
 
     return Individual(child_chromosome);
 }
@@ -253,18 +227,13 @@ int Individual::cal_fitness() {
     int len = chromosome.size();
 
     for (int i = 0; i < chromosome[0].size(); ++i)
-    {
         for (int j = 0; j < chromosome.size()-1; ++j)
-        {
             fitness += dist[ chromosome[j][i]-1 ][ chromosome[j+1][i]-1 ];
-        }
-    }
 
     fitness += home_venue_constraint(chromosome);
     fitness += q1_constraint(chromosome);
     fitness += q2_constraint(chromosome);
     
-
     return fitness;
 
 }
@@ -284,7 +253,6 @@ bool operator<(const Individual &ind1, const Individual &ind2)
 {
     return ind1.fitness < ind2.fitness;
 }
-
 
 // RESTRICTIONS
 vector<vector<int>> generate_home_venues() {
@@ -317,8 +285,6 @@ int main(int argc, char const *argv[]){
     q1 = stoi( argv[2] );
     q2 = stoi( argv[3] );
     nIter = stoi( argv[4] );
-
-
 
     // READ FILE
     FILE *fp;
@@ -359,24 +325,15 @@ int main(int argc, char const *argv[]){
     home_venues = generate_home_venues(); // OK for nUmpires
 
     // Actual AE:
-
     int generation = 0;
     srand((unsigned)(time(0)));
     vector<Individual> population;
 
-
-
     // Generate first generation
-    for (int i = 0; i < POPULATION_SIZE; ++i)
-    {
+    for (int i = 0; i < POPULATION_SIZE; ++i) {
         vector<vector<int>> gnome = create_gnome();
         population.push_back(Individual(gnome));
-
-
     }
-
-
-
 
     int current_iter = 0;
 
@@ -384,9 +341,8 @@ int main(int argc, char const *argv[]){
         
         sort( population.begin(), population.end());
 
-        // generate a new generation
+        // Generate a new generation
         vector<Individual> new_generation;
-
 
         // Elitism, 10% of best population goes to the next generation
         int s = (10 * POPULATION_SIZE) / 100;
@@ -394,10 +350,10 @@ int main(int argc, char const *argv[]){
             new_generation.push_back( population[i] );
 
 
-        // Mate the 50% of the remaining population
+        // Mate 50% of the remaining population
         s = (90 * POPULATION_SIZE) / 100;
-        for (int i = 0; i < s; i++)
-        {
+
+        for (int i = 0; i < s; i++) {
             int len = population.size()*0.5;
             
             int r = random_num(0, len);
@@ -410,9 +366,7 @@ int main(int argc, char const *argv[]){
             new_generation.push_back( child );
         }
         population = new_generation;
-
         current_iter++;
-
 
         printf("\nGeneration: %d && ", current_iter);
 
@@ -425,12 +379,10 @@ int main(int argc, char const *argv[]){
     sort( population.begin(), population.end());
 
     printf("\nGeneration: %d\n~~~~~~~~~~~~~~~~", current_iter);
-    
     printf("\nq1: %d", q1);
 
-    printf("\n\nFitness individual %d: %d", 0, population[0].fitness);
+    printf("\n\nFitness: %d", population[0].fitness);
     population[0].print_umpires();
-
  
     printf("\nHome venue constraint?: %d", home_venue_constraint(population[0].chromosome));
     printf("\nQ1 constraint?: %d", q1_constraint(population[0].chromosome));
