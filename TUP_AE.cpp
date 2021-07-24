@@ -3,6 +3,7 @@
 #include <regex>
 #include <vector>
 #include <algorithm>
+#include <cmath>
 
 using namespace std;
 
@@ -13,9 +14,10 @@ int q1;
 int q2;
 
 
-# define POPULATION_SIZE 500
+# define POPULATION_SIZE 200
 # define HOME_VENUE_PENALIZATION 5000
 # define Q1_PENALIZATION 5000
+# define Q2_PENALIZATION 5000
 
 
 /*
@@ -82,30 +84,20 @@ void printf_vector(vector<int> v) {
 // each umpire must visit each venue at least once
 int home_venue_constraint(vector<vector<int>> chromosome) {
 
-
     vector< vector<int> > chromosome_T(chromosome[0].size(), vector<int>(chromosome.size()));
 
     for (vector<int>::size_type i(0); i < chromosome[0].size(); ++i)
         for (vector<int>::size_type j(0); j < chromosome.size(); ++j)
             chromosome_T[i][j] = chromosome[j][i];
 
-    // printf("chromosome_T.size(): %d\n", chromosome_T.size());
-    // printf("chromosome_T[0].size(): %d\n", chromosome_T[0].size());
-
-    int n = 0; // number of fails to meet the constraints
+    int n = 0; // number of times where constraint is not met
 
     for (int i = 0; i < chromosome_T.size(); ++i)
-    {
         for (int j = 1; j <= dist.size(); ++j)
-        {   
             if(not (find(chromosome_T[i].begin(), chromosome_T[i].end(), j) != chromosome_T[i].end()) )
                 n++;
-        }
-    }
 
     return n*HOME_VENUE_PENALIZATION;
-
-
 }
 
 
@@ -120,31 +112,58 @@ int q1_constraint(vector<vector<int>> chromosome) {
         for (vector<int>::size_type j(0); j < chromosome.size(); ++j)
             chromosome_T[i][j] = chromosome[j][i];
 
+    for (int i = 0; i < chromosome_T.size(); ++i)
+        for (int j = 0; j < chromosome_T[i].size(); ++j)
+            for (int k = 1; k <= q1 and j+k<chromosome_T[i].size(); k++)  
+                if (chromosome_T[i][j] == chromosome_T[i][j+k])
+                    penalization += Q1_PENALIZATION;
+
+    return penalization;
+}
+
+
+int q2_constraint(vector<vector<int>> chromosome) {
+
+    int penalization = 0;
+
+    vector< vector<int> > chromosome_T(chromosome[0].size(), vector<int>(chromosome.size()));
+
+    for (vector<int>::size_type i(0); i < chromosome[0].size(); ++i)
+        for (vector<int>::size_type j(0); j < chromosome.size(); ++j)
+            chromosome_T[i][j] = chromosome[j][i];
 
 
     for (int i = 0; i < chromosome_T.size(); ++i)
     {
+        //printf_vector(chromosome_T[0]);
         for (int j = 0; j < chromosome_T[i].size(); ++j)
         {
-            for (int k = 1; k <= q1 and j+k<chromosome_T[i].size(); k++)
+            for (int k = 1; k <= q2 and j+k<chromosome_T[i].size(); k++)
             {   
-                if (chromosome_T[i][j] == chromosome_T[i][j+k]) {
-                    penalization += Q1_PENALIZATION;
-                }
-            }
+                int current_local = abs(chromosome_T[i][j]);
+                int current_visitor = abs(opponents[i][chromosome_T[i][j]-1]);
 
+                int future_local = abs(chromosome_T[i][j+k]);
+                int future_visitor = abs(opponents[i][chromosome_T[i][j+k]-1]);
+
+                //printf("i: %d, j: %d, k: %d -> ", i, j, k);
+                //printf("%d, %d, %d, %d\n", current_local, current_visitor, future_local, future_visitor);
+
+                if ((current_local == future_local) or
+                    (current_local == future_visitor) or
+                    (current_visitor == future_local) or
+                    (current_visitor == future_visitor))
+
+                    //printf("failed!\n");
+                    penalization += Q2_PENALIZATION;
+
+            }
         }
     }
 
-
-    /*if (Q1_PENALIZATION != 0) {
-        printf("penalization: %d\n", penalization);
-        printf_vector(umpire);
-    }*/
-
     return penalization;
-    //return true;
 }
+
 
 // generate a random number
 int random_num(int start, int end) {
@@ -170,8 +189,6 @@ vector<vector<int>> create_gnome() {
         std::shuffle(std::begin(gnome[i]), std::end(gnome[i]), rng);
 
         //random_shuffle(gnome[i].begin(), gnome[i].end());
-
-        // gnome.push_back(mutated_genes(home_venues[i]));
     }
 
     return gnome;
@@ -245,6 +262,7 @@ int Individual::cal_fitness() {
 
     fitness += home_venue_constraint(chromosome);
     fitness += q1_constraint(chromosome);
+    fitness += q2_constraint(chromosome);
     
 
     return fitness;
@@ -340,9 +358,6 @@ int main(int argc, char const *argv[]){
     // tuples of home venues for each round
     home_venues = generate_home_venues(); // OK for nUmpires
 
-
-
-
     // Actual AE:
 
     int generation = 0;
@@ -400,13 +415,11 @@ int main(int argc, char const *argv[]){
 
 
         printf("\nGeneration: %d && ", current_iter);
-        
-        //vector<vector<int>> chromosome = {{1, 2}, {3, 1}, {1, 3}, {3, 4}, {4, 2}, {2, 4}} ;
-        //population[0] = chromosome;
 
         int i = 0;
-        printf("Fitness individual %d: %d, home_venue: %d ", i, population[i].fitness, home_venue_constraint(population[i].chromosome));
-        printf("q1: %d \n", q1_constraint(population[0].chromosome));
+        printf("Fitness individual %d: %d, home_venue: %d", i, population[i].fitness, home_venue_constraint(population[i].chromosome));
+        printf(", q1: %d", q1_constraint(population[0].chromosome));
+        printf(", q2: %d", q2_constraint(population[0].chromosome));
 
     }
     sort( population.begin(), population.end());
@@ -420,7 +433,8 @@ int main(int argc, char const *argv[]){
 
  
     printf("\nHome venue constraint?: %d", home_venue_constraint(population[0].chromosome));
-    printf("\nQ1 constraint?: %d\n", q1_constraint(population[0].chromosome));
+    printf("\nQ1 constraint?: %d", q1_constraint(population[0].chromosome));
+    printf("\nQ2 constraint?: %d\n", q2_constraint(population[0].chromosome));
 
     return 0;
 }
