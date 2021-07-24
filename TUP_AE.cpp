@@ -13,7 +13,7 @@ int q1;
 int q2;
 
 
-# define POPULATION_SIZE 100
+# define POPULATION_SIZE 500
 # define HOME_VENUE_PENALIZATION 5000
 # define Q1_PENALIZATION 5000
 
@@ -249,32 +249,6 @@ int Individual::cal_fitness() {
 
     return fitness;
 
-/*
-    for (int i = 0; i < len-1; i++) {
-        
-        // Umpire 1
-        fitness += dist[chromosome[i]][chromosome[i+1]];
-
-        // Umpire 2
-        int ump2_start = get_the_other_venue(i, chromosome[i]+1)-1;
-        int ump2_end = get_the_other_venue(i, chromosome[i+1]+1)-1;
-
-        fitness += dist[ump2_start][ump2_end];
-
-    }
-
-    fitness += verify_q1(chromosome);
-
-    if ( not home_venue_constraint(chromosome) )
-        fitness += HOME_VENUE_PENALIZATION; */
-/*
-
-    if ( not verify_q1(chromosome) )
-        fitness += Q1_PENALIZATION;
-    else printf("Q1 for UMP1 TRUE!!!\n");
-    if ( not verify_q1(chromosome2) )
-	fitness += Q1_PENALIZATION;
-*/
 }
 
 void Individual::print_umpires() {
@@ -431,37 +405,9 @@ int main(int argc, char const *argv[]){
         //population[0] = chromosome;
 
         int i = 0;
-        printf("Fitness individual %d: %d, home_venue: %d", i, population[i].fitness, home_venue_constraint(population[i].chromosome));
-        //population[i].print_umpires();
+        printf("Fitness individual %d: %d, home_venue: %d ", i, population[i].fitness, home_venue_constraint(population[i].chromosome));
+        printf("q1: %d \n", q1_constraint(population[0].chromosome));
 
-        /*for (int i = 0; i < population.size(); ++i)
-        {
-            printf("\n\nFitness individual %d: %d, home_venue: %d", i, population[i].fitness, home_venue_constraint(population[i].chromosome));
-            population[i].print_umpires();
-
-        }*/
-
-        if (false){//current_iter % 10 == 0) {
-            /*printf("Sequence: ");
-            for (int i = 0; i < population[0].chromosome.size(); ++i)
-            {
-                printf("%d , ", population[0].chromosome[i]);
-            }*/
-
-
-            
-            printf("Best Fitness: %d && ", population[0].fitness);
-
-            population[0].print_umpires();
-
-            int sum = 0;
-            for (int i = 0; i < population.size(); ++i)
-            {
-                sum += population[i].fitness;
-            }
-            printf("\nTotal Gen Fitness: %d && ", sum);
-            
-        }
     }
     sort( population.begin(), population.end());
 
