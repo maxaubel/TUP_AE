@@ -13,9 +13,9 @@ int q1;
 int q2;
 
 
-# define POPULATION_SIZE 10
+# define POPULATION_SIZE 100
 # define HOME_VENUE_PENALIZATION 5000
-# define Q1_PENALIZATION 10000
+# define Q1_PENALIZATION 5000
 
 
 /*
@@ -98,9 +98,6 @@ int home_venue_constraint(vector<vector<int>> chromosome) {
     {
         for (int j = 1; j <= dist.size(); ++j)
         {   
-            //printf("is %d in the vector: ", j);
-            //printf_vector(chromosome_T[i]);
-
             if(not (find(chromosome_T[i].begin(), chromosome_T[i].end(), j) != chromosome_T[i].end()) )
                 n++;
         }
@@ -113,24 +110,32 @@ int home_venue_constraint(vector<vector<int>> chromosome) {
 
 
 
-int verify_q1(vector<vector<int>> chromosome) {
+int q1_constraint(vector<vector<int>> chromosome) {
     
     int penalization = 0;
 
+    vector< vector<int> > chromosome_T(chromosome[0].size(), vector<int>(chromosome.size()));
+
+    for (vector<int>::size_type i(0); i < chromosome[0].size(); ++i)
+        for (vector<int>::size_type j(0); j < chromosome.size(); ++j)
+            chromosome_T[i][j] = chromosome[j][i];
 
 
-    for (int i = 0; i < chromosome.size(); ++i)
+
+    for (int i = 0; i < chromosome_T.size(); ++i)
     {
-        for (int j = 1; j <= q1 and i+j<chromosome.size(); ++j)
-        {   
-            if (chromosome[i] == chromosome[i+j]) {
-
-                penalization += Q1_PENALIZATION;
-
-                // return false;
+        for (int j = 0; j < chromosome_T[i].size(); ++j)
+        {
+            for (int k = 1; k <= q1 and j+k<chromosome_T[i].size(); k++)
+            {   
+                if (chromosome_T[i][j] == chromosome_T[i][j+k]) {
+                    penalization += Q1_PENALIZATION;
+                }
             }
+
         }
     }
+
 
     /*if (Q1_PENALIZATION != 0) {
         printf("penalization: %d\n", penalization);
@@ -239,8 +244,8 @@ int Individual::cal_fitness() {
     }
 
     fitness += home_venue_constraint(chromosome);
-
-
+    fitness += q1_constraint(chromosome);
+    
 
     return fitness;
 
@@ -466,22 +471,10 @@ int main(int argc, char const *argv[]){
 
     printf("\n\nFitness individual %d: %d", 0, population[0].fitness);
     population[0].print_umpires();
-    /*
-    for (int i = 0; i < population.size(); ++i)
-    {
-        printf("\n\nFitness individual %d: %d", i, population[i].fitness);
-        population[i].print_umpires();
-    }*/
-
-    /*printf("UMP1 q1?: %s && ", (verify_q1(population[0].chromosome) ? "true" : "false"));
-    printf("UMP2 q1?: %s && ", (verify_q1(population[0].chromosome2) ? "true" : "false"));*/
-
-    // printf("UMP1 q1?: %d\n", verify_q1(population[0].chromosome));
-    // printf("UMP2 q1?: %d\n", verify_q1(population[0].chromosome2));
 
  
- 
-    printf("Home venue constraint?: %d\n", home_venue_constraint(population[0].chromosome));
+    printf("\nHome venue constraint?: %d", home_venue_constraint(population[0].chromosome));
+    printf("\nQ1 constraint?: %d\n", q1_constraint(population[0].chromosome));
 
     return 0;
 }
