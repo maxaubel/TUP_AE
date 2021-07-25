@@ -337,7 +337,8 @@ int main(int argc, char const *argv[]){
     }
 
     int current_iter = 0;
-    auto start = high_resolution_clock::now();
+    time_t stop;
+    time_t start = time(NULL);
 
     while(current_iter <= nIter) {
         
@@ -377,16 +378,15 @@ int main(int argc, char const *argv[]){
         printf(", q1: %d", q1_constraint(population[0].chromosome));
         printf(", q2: %d", q2_constraint(population[0].chromosome));
 
-        auto stop = high_resolution_clock::now();
-        auto duration = duration_cast<microseconds>(stop - start) / 1000000;
+        stop = time(NULL);
 
-        if (duration >= 7200) {
-            printf("Maximum run time of 2 hours reached before reaching %d!!\n", nIter);
+        if (stop-start >= 7200) { //7200 s = 2 h
+            printf("\n\nMaximum run time of 2 hours reached before reaching %d!!\n", nIter);
             break;
         }
     }
-    auto stop = high_resolution_clock::now(); /////////
-    auto duration = duration_cast<microseconds>(stop - start);
+    //auto stop = high_resolution_clock::now(); /////////
+    //auto duration = duration_cast<microseconds>(stop - start);
 
     sort( population.begin(), population.end());
 
@@ -400,8 +400,8 @@ int main(int argc, char const *argv[]){
     printf("\nQ2 (Q2=%d) constraint?: %d\n", q2, q2_constraint(population[0].chromosome));
 
     printf("Population Size: %d\n", POPULATION_SIZE);
-    printf("Time taken by loop: %d seconds\n",  duration.count()/1000000);
-    printf("Average time per generation: %d microseconds, or around %d miliseconds\n", duration.count()/nIter, duration.count()/(1000*nIter));
+    printf("Time taken by loop: %d seconds\n",  stop-start);
+    printf("Average time per generation: %d microseconds, or around %d miliseconds\n", (stop-start)/(1000000*nIter), (stop-start)/(1000*nIter));
 
     return 0;
 }
