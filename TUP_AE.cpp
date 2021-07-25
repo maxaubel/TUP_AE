@@ -401,7 +401,7 @@ int main(int argc, char const *argv[]){
 
     printf("Population Size: %d\n", POPULATION_SIZE);
     printf("Time taken by loop: %d seconds\n",  stop-start);
-    printf("Average time per generation: %d microseconds, or around %d miliseconds\n", (stop-start)/(1000000*nIter), (stop-start)/(1000*nIter));
+    printf("Average time per generation: %d microseconds, or around %d miliseconds\n", (stop-start)/(1000000*current_iter), (stop-start)/(1000*current_iter));
 
     return 0;
 }
