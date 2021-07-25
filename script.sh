@@ -1,12 +1,16 @@
 foldername="output/$(date +%d-%m-%y_%H-%M-%S)"
 echo "folder name: $foldername"
 mkdir -p "$foldername"
+q1=1
+q2=2
+nIter_short=1000
+nIter_long=10000000
+nIndividuals=1000
 
 echo "6 teams and 1000 generations:"
 python alert.py working on 6 teams, 1000 generations, 1000 individuals
 ./TUP instances/umps6.txt 1 1 1000 1000 > "$foldername"/umps6_1_1_1000_1000.txt
 python alert.py "$foldername"/umps6_1_1_1000_1000.txt ./TUP instances/umps6.txt 1 1 1000 1000 `tail -n 16 "$foldername"/umps6_1_1_1000_1000.txt`
-
 
 echo "8 teams and 1000 instances:"
 python alert.py working on 8 teams, 1000 generations, 1000 individuals
