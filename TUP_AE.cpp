@@ -4,8 +4,10 @@
 #include <vector>
 #include <algorithm>
 #include <cmath>
+#include <chrono>
 
 using namespace std;
+using namespace std::chrono;
 
 vector<vector <int>> dist;
 vector<vector <int>> opponents;
@@ -13,8 +15,8 @@ vector<vector <int>> home_venues;
 int q1;
 int q2;
 
+int POPULATION_SIZE;
 
-# define POPULATION_SIZE 200
 # define HOME_VENUE_PENALIZATION 5000
 # define Q1_PENALIZATION 5000
 # define Q2_PENALIZATION 5000
@@ -25,14 +27,13 @@ int q2;
     pop_size: 50
     home venue penalization and q1 values: 10000
 
-
 * for nTeams <= 18:
     home venue penalization and q1 values: 10000
-for nTeams <= 20:
+* for nTeams <= 20:
     home venue penalization and q1 values: 100000
     Max_iter = 10000 o más
 
-for nTeams <= 30:
+* for nTeams <= 30:
     home venue penalization and q1 values: 
     Max_iter = 
 
@@ -141,7 +142,6 @@ int q2_constraint(vector<vector<int>> chromosome) {
                     (current_visitor == future_visitor))
 
                     penalization += Q2_PENALIZATION;
-
             }
         }
     }
@@ -274,12 +274,13 @@ vector<vector<int>> generate_home_venues() {
 
 int main(int argc, char const *argv[]){
 
+    POPULATION_SIZE = 100;
     int nIter;
-
-    if (argc != 5) {
-        printf("Incorrect number of parameters. Expected 5, received %d!!!\n\n", argc);
-        return -1;
+    if (argc == 6) {
+        POPULATION_SIZE = stoi( argv[5] );
     }
+
+
 
     string filename = argv[1];
     q1 = stoi( argv[2] );
@@ -336,6 +337,7 @@ int main(int argc, char const *argv[]){
     }
 
     int current_iter = 0;
+    auto start = high_resolution_clock::now();
 
     while(current_iter <= nIter) {
         
@@ -376,17 +378,23 @@ int main(int argc, char const *argv[]){
         printf(", q2: %d", q2_constraint(population[0].chromosome));
 
     }
+    auto stop = high_resolution_clock::now(); /////////
+    auto duration = duration_cast<microseconds>(stop - start);
+
     sort( population.begin(), population.end());
 
     printf("\nGeneration: %d\n~~~~~~~~~~~~~~~~", current_iter);
-    printf("\nq1: %d", q1);
 
     printf("\n\nFitness: %d", population[0].fitness);
     population[0].print_umpires();
  
-    printf("\nHome venue constraint?: %d", home_venue_constraint(population[0].chromosome));
-    printf("\nQ1 constraint?: %d", q1_constraint(population[0].chromosome));
-    printf("\nQ2 constraint?: %d\n", q2_constraint(population[0].chromosome));
+    printf("\n\nHome venue constraint?: %d", home_venue_constraint(population[0].chromosome));
+    printf("\nQ1 (Q1=%d) constraint?: %d", q1, q1_constraint(population[0].chromosome));
+    printf("\nQ2 (Q2=%d) constraint?: %d\n", q2, q2_constraint(population[0].chromosome));
+
+    printf("Population Size: %d\n", POPULATION_SIZE);
+    printf("Time taken by loop: %d seconds\n",  duration.count()/1000000);
+    printf("Average time per generation: %d microseconds, or around %d miliseconds\n", duration.count()/nIter, duration.count()/(1000*nIter));
 
     return 0;
 }
