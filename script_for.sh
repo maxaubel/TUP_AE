@@ -5,122 +5,131 @@ mkdir -p "$foldername"
 nIter=10000000
 nIndividuals=1000
 
-nTeams=4
-for q1 in 1 2
-do
-	q2=1
-	echo "$nTeams teams and $nIter generations, with q1: $q1, q2: $q2 (second script)"
-	python alert.py working on $nTeams teams, $nIter, $nIndividuals individuals
-	./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} > "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt
-	python alert.py "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt ./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} `tail -n 30 "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt`
-done
 
-nTeams=6
-for q1 in 1 2 3
-do
-	for q2 in 1
+if test $1 = 1
+then
+	nTeams=4
+	for q1 in 1 2
 	do
+		q2=1
 		echo "$nTeams teams and $nIter generations, with q1: $q1, q2: $q2 (second script)"
 		python alert.py working on $nTeams teams, $nIter, $nIndividuals individuals
 		./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} > "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt
 		python alert.py "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt ./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} `tail -n 30 "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt`
 	done
-done
 
-nTeams=8
-for q1 in 1 2 3 4
-do
-	for q2 in 1 2
+	nTeams=6
+	for q1 in 1 2 3
 	do
-		echo "$nTeams teams and $nIter generations, with q1: $q1, q2: $q2 (second script)"
-		python alert.py working on $nTeams teams, $nIter, $nIndividuals individuals
-		./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} > "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt
-		python alert.py "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt ./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} `tail -n 30 "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt`
+		for q2 in 1
+		do
+			echo "$nTeams teams and $nIter generations, with q1: $q1, q2: $q2 (second script)"
+			python alert.py working on $nTeams teams, $nIter, $nIndividuals individuals
+			./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} > "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt
+			python alert.py "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt ./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} `tail -n 30 "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt`
+		done
 	done
-done
 
-nTeams=10
-for q1 in 1 2 3 4
-do
-	for q2 in 1 2
+	nTeams=8
+	for q1 in 1 2 3 4
 	do
-		echo "$nTeams teams and $nIter generations, with q1: $q1, q2: $q2 (second script)"
-		python alert.py working on $nTeams teams, $nIter, $nIndividuals individuals
-		./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} > "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt
-		python alert.py "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt ./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} `tail -n 30 "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt`
+		for q2 in 1 2
+		do
+			echo "$nTeams teams and $nIter generations, with q1: $q1, q2: $q2 (second script)"
+			python alert.py working on $nTeams teams, $nIter, $nIndividuals individuals
+			./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} > "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt
+			python alert.py "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt ./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} `tail -n 30 "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt`
+		done
 	done
-done
 
-nTeams=12
-for q1 in 1 2 3 4
-do
-	for q2 in 1 2
+	nTeams=10
+	for q1 in 1 2 3 4
 	do
-		echo "$nTeams teams and $nIter generations, with q1: $q1, q2: $q2 (second script)"
-		python alert.py working on $nTeams teams, $nIter, $nIndividuals individuals
-		./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} > "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt
-		python alert.py "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt ./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} `tail -n 30 "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt`
+		for q2 in 1 2
+		do
+			echo "$nTeams teams and $nIter generations, with q1: $q1, q2: $q2 (second script)"
+			python alert.py working on $nTeams teams, $nIter, $nIndividuals individuals
+			./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} > "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt
+			python alert.py "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt ./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} `tail -n 30 "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt`
+		done
 	done
-done
+fi
 
-nTeams=14
-for q1 in 2 4 5 6
-do
-	for q2 in 1 2
+if test $1 = 2
+then
+	nTeams=12
+	for q1 in 1 2 3 4
 	do
-		echo "$nTeams teams and $nIter generations, with q1: $q1, q2: $q2 (second script)"
-		python alert.py working on $nTeams teams, $nIter, $nIndividuals individuals
-		./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} > "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt
-		python alert.py "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt ./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} `tail -n 30 "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt`
+		for q2 in 1 2
+		do
+			echo "$nTeams teams and $nIter generations, with q1: $q1, q2: $q2 (second script)"
+			python alert.py working on $nTeams teams, $nIter, $nIndividuals individuals
+			./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} > "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt
+			python alert.py "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt ./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} `tail -n 30 "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt`
+		done
 	done
-done
 
-nTeams=16
-for q1 in 2 4 6 8
-do
-	for q2 in 1 2 3
+	nTeams=14
+	for q1 in 2 4 5 6
 	do
-		echo "$nTeams teams and $nIter generations, with q1: $q1, q2: $q2 (second script)"
-		python alert.py working on $nTeams teams, $nIter, $nIndividuals individuals
-		./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} > "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt
-		python alert.py "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt ./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} `tail -n 30 "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt`
+		for q2 in 1 2
+		do
+			echo "$nTeams teams and $nIter generations, with q1: $q1, q2: $q2 (second script)"
+			python alert.py working on $nTeams teams, $nIter, $nIndividuals individuals
+			./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} > "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt
+			python alert.py "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt ./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} `tail -n 30 "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt`
+		done
 	done
-done
 
-nTeams=18
-for q1 in 2 4 6 8 9
-do
-	for q2 in 1 3
+	nTeams=16
+	for q1 in 2 4 6 8
 	do
-		echo "$nTeams teams and $nIter generations, with q1: $q1, q2: $q2 (second script)"
-		python alert.py working on $nTeams teams, $nIter, $nIndividuals individuals
-		./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} > "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt
-		python alert.py "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt ./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} `tail -n 30 "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt`
+		for q2 in 1 2 3
+		do
+			echo "$nTeams teams and $nIter generations, with q1: $q1, q2: $q2 (second script)"
+			python alert.py working on $nTeams teams, $nIter, $nIndividuals individuals
+			./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} > "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt
+			python alert.py "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt ./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} `tail -n 30 "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt`
+		done
 	done
-done
+fi
 
 
-
-nTeams=20
-for q1 in 4 6 8 10
-do
-	for q2 in 1 3 4
+if test $1 = 3
+then
+	nTeams=18
+	for q1 in 2 4 6 8 9
 	do
-		echo "$nTeams teams and $nIter generations, with q1: $q1, q2: $q2 (second script)"
-		python alert.py working on $nTeams teams, $nIter, $nIndividuals individuals
-		./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} > "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt
-		python alert.py "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt ./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} `tail -n 30 "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt`
+		for q2 in 1 3
+		do
+			echo "$nTeams teams and $nIter generations, with q1: $q1, q2: $q2 (second script)"
+			python alert.py working on $nTeams teams, $nIter, $nIndividuals individuals
+			./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} > "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt
+			python alert.py "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt ./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} `tail -n 30 "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt`
+		done
 	done
-done
 
-nTeams=30
-for q1 in 4 8 12 15
-do
-	for q2 in 1 4 6 7
+	nTeams=20
+	for q1 in 4 6 8 10
 	do
-		echo "$nTeams teams and $nIter generations, with q1: $q1, q2: $q2 (second script)"
-		python alert.py working on $nTeams teams, $nIter, $nIndividuals individuals
-		./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} > "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt
-		python alert.py "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt ./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} `tail -n 30 "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt`
+		for q2 in 1 3 4
+		do
+			echo "$nTeams teams and $nIter generations, with q1: $q1, q2: $q2 (second script)"
+			python alert.py working on $nTeams teams, $nIter, $nIndividuals individuals
+			./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} > "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt
+			python alert.py "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt ./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} `tail -n 30 "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt`
+		done
 	done
-done
+
+	nTeams=30
+	for q1 in 4 8 12 15
+	do
+		for q2 in 1 4 6 7
+		do
+			echo "$nTeams teams and $nIter generations, with q1: $q1, q2: $q2 (second script)"
+			python alert.py working on $nTeams teams, $nIter, $nIndividuals individuals
+			./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} > "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt
+			python alert.py "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt ./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} `tail -n 30 "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt`
+		done
+	done
+fi
