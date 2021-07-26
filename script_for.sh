@@ -1,4 +1,4 @@
-foldername="output/$(date +%d-%m-%y_%H-%M-%S)"
+foldername="output_new/$(date +%y-%m-%d_%H-%M-%S)"
 echo "folder name: $foldername"
 mkdir -p "$foldername"
 
