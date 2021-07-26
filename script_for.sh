@@ -6,8 +6,7 @@ nIter=10000000
 nIndividuals=1000
 
 
-if test $1 = 1
-then
+function first {
 	nTeams=4
 	for q1 in 1 2
 	do
@@ -53,10 +52,9 @@ then
 			python alert.py "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt ./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} `tail -n 30 "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt`
 		done
 	done
-fi
+}
 
-if test $1 = 2
-then
+function second {
 	nTeams=12
 	for q1 in 1 2 3 4
 	do
@@ -92,11 +90,10 @@ then
 			python alert.py "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt ./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} `tail -n 30 "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt`
 		done
 	done
-fi
+}
 
 
-if test $1 = 3
-then
+function third {
 	nTeams=18
 	for q1 in 2 4 6 8 9
 	do
@@ -132,4 +129,11 @@ then
 			python alert.py "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt ./TUP instances/umps${nTeams}.txt ${q1} ${q2} ${nIter} ${nIndividuals} `tail -n 30 "$foldername"/umps${nTeams}_${q1}_${q2}_${nIter}_${nIndividuals}.txt`
 		done
 	done
-fi
+}
+
+
+first &
+second & 
+third &
+
+wait
