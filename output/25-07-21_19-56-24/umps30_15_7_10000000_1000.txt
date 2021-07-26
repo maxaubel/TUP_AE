@@ -1,0 +1,200 @@
+
+Generation: 1 && Fitness individual 0: 5471576, home_venue: 345000, q1: 2380000, q2: 1970000
+Generation: 2 && Fitness individual 0: 5029059, home_venue: 285000, q1: 2165000, q2: 1805000
+Generation: 3 && Fitness individual 0: 5029059, home_venue: 285000, q1: 2165000, q2: 1805000
+Generation: 4 && Fitness individual 0: 4969790, home_venue: 285000, q1: 2125000, q2: 1800000
+Generation: 5 && Fitness individual 0: 4780284, home_venue: 285000, q1: 2135000, q2: 1605000
+Generation: 6 && Fitness individual 0: 4780284, home_venue: 285000, q1: 2135000, q2: 1605000
+Generation: 7 && Fitness individual 0: 4721843, home_venue: 235000, q1: 2040000, q2: 1685000
+Generation: 8 && Fitness individual 0: 4667585, home_venue: 205000, q1: 2025000, q2: 1645000
+Generation: 9 && Fitness individual 0: 4667585, home_venue: 205000, q1: 2025000, q2: 1645000
+Generation: 10 && Fitness individual 0: 4651703, home_venue: 210000, q1: 1965000, q2: 1705000
+Generation: 11 && Fitness individual 0: 4651703, home_venue: 210000, q1: 1965000, q2: 1705000
+Generation: 12 && Fitness individual 0: 4646493, home_venue: 235000, q1: 2040000, q2: 1580000
+Generation: 13 && Fitness individual 0: 4619340, home_venue: 205000, q1: 2020000, q2: 1620000
+Generation: 14 && Fitness individual 0: 4619340, home_venue: 205000, q1: 2020000, q2: 1620000
+Generation: 15 && Fitness individual 0: 4619340, home_venue: 205000, q1: 2020000, q2: 1620000
+Generation: 16 && Fitness individual 0: 4596077, home_venue: 215000, q1: 1985000, q2: 1625000
+Generation: 17 && Fitness individual 0: 4596077, home_venue: 215000, q1: 1985000, q2: 1625000
+Generation: 18 && Fitness individual 0: 4596077, home_venue: 215000, q1: 1985000, q2: 1625000
+Generation: 19 && Fitness individual 0: 4596077, home_venue: 215000, q1: 1985000, q2: 1625000
+Generation: 20 && Fitness individual 0: 4596077, home_venue: 215000, q1: 1985000, q2: 1625000
+Generation: 21 && Fitness individual 0: 4582107, home_venue: 225000, q1: 1970000, q2: 1605000
+Generation: 22 && Fitness individual 0: 4537207, home_venue: 175000, q1: 2000000, q2: 1585000
+Generation: 23 && Fitness individual 0: 4537207, home_venue: 175000, q1: 2000000, q2: 1585000
+Generation: 24 && Fitness individual 0: 4537207, home_venue: 175000, q1: 2000000, q2: 1585000
+Generation: 25 && Fitness individual 0: 4537207, home_venue: 175000, q1: 2000000, q2: 1585000
+Generation: 26 && Fitness individual 0: 4537207, home_venue: 175000, q1: 2000000, q2: 1585000
+Generation: 27 && Fitness individual 0: 4537207, home_venue: 175000, q1: 2000000, q2: 1585000
+Generation: 28 && Fitness individual 0: 4537207, home_venue: 175000, q1: 2000000, q2: 1585000
+Generation: 29 && Fitness individual 0: 4537207, home_venue: 175000, q1: 2000000, q2: 1585000
+Generation: 30 && Fitness individual 0: 4514536, home_venue: 230000, q1: 1960000, q2: 1545000
+Generation: 31 && Fitness individual 0: 4514536, home_venue: 230000, q1: 1960000, q2: 1545000
+Generation: 32 && Fitness individual 0: 4514536, home_venue: 230000, q1: 1960000, q2: 1545000
+Generation: 33 && Fitness individual 0: 4514536, home_venue: 230000, q1: 1960000, q2: 1545000
+Generation: 34 && Fitness individual 0: 4514536, home_venue: 230000, q1: 1960000, q2: 1545000
+Generation: 35 && Fitness individual 0: 4514536, home_venue: 230000, q1: 1960000, q2: 1545000
+Generation: 36 && Fitness individual 0: 4514536, home_venue: 230000, q1: 1960000, q2: 1545000
+Generation: 37 && Fitness individual 0: 4514536, home_venue: 230000, q1: 1960000, q2: 1545000
+Generation: 38 && Fitness individual 0: 4514536, home_venue: 230000, q1: 1960000, q2: 1545000
+Generation: 39 && Fitness individual 0: 4514536, home_venue: 230000, q1: 1960000, q2: 1545000
+Generation: 40 && Fitness individual 0: 4514536, home_venue: 230000, q1: 1960000, q2: 1545000
+Generation: 41 && Fitness individual 0: 4502820, home_venue: 215000, q1: 1990000, q2: 1520000
+Generation: 42 && Fitness individual 0: 4502820, home_venue: 215000, q1: 1990000, q2: 1520000
+Generation: 43 && Fitness individual 0: 4502820, home_venue: 215000, q1: 1990000, q2: 1520000
+Generation: 44 && Fitness individual 0: 4502820, home_venue: 215000, q1: 1990000, q2: 1520000
+Generation: 45 && Fitness individual 0: 4502820, home_venue: 215000, q1: 1990000, q2: 1520000
+Generation: 46 && Fitness individual 0: 4434072, home_venue: 210000, q1: 1820000, q2: 1640000
+Generation: 47 && Fitness individual 0: 4434072, home_venue: 210000, q1: 1820000, q2: 1640000
+Generation: 48 && Fitness individual 0: 4434072, home_venue: 210000, q1: 1820000, q2: 1640000
+Generation: 49 && Fitness individual 0: 4434072, home_venue: 210000, q1: 1820000, q2: 1640000
+Generation: 50 && Fitness individual 0: 4434072, home_venue: 210000, q1: 1820000, q2: 1640000
+Generation: 51 && Fitness individual 0: 4434072, home_venue: 210000, q1: 1820000, q2: 1640000
+Generation: 52 && Fitness individual 0: 4434072, home_venue: 210000, q1: 1820000, q2: 1640000
+Generation: 53 && Fitness individual 0: 4434072, home_venue: 210000, q1: 1820000, q2: 1640000
+Generation: 54 && Fitness individual 0: 4434072, home_venue: 210000, q1: 1820000, q2: 1640000
+Generation: 55 && Fitness individual 0: 4434072, home_venue: 210000, q1: 1820000, q2: 1640000
+Generation: 56 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 57 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 58 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 59 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 60 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 61 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 62 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 63 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 64 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 65 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 66 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 67 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 68 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 69 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 70 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 71 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 72 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 73 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 74 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 75 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 76 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 77 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 78 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 79 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 80 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 81 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 82 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 83 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 84 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 85 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 86 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 87 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 88 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 89 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 90 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 91 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 92 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 93 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 94 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 95 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 96 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 97 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 98 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 99 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 100 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 101 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 102 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 103 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 104 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 105 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 106 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 107 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 108 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 109 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 110 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 111 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 112 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 113 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 114 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 115 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 116 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 117 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 118 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 119 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 120 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 121 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 122 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 123 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 124 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 125 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 126 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 127 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 128 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 129 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 130 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 131 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 132 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 133 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 134 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 135 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 136 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 137 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 138 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 139 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 140 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 141 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 142 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 143 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 144 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 145 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 146 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 147 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 148 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 149 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 150 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 151 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 152 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 153 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 154 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 155 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 156 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 157 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 158 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 159 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 160 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 161 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 162 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 163 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 164 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 165 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 166 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 167 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 168 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 169 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+Generation: 170 && Fitness individual 0: 4396549, home_venue: 215000, q1: 1905000, q2: 1510000
+
+Maximum run time of 2 hours reached before reaching 10000000!!
+
+Generation: 170
+~~~~~~~~~~~~~~~~
+
+Fitness: 4396549
+Umpire 0:   19 19 17 30 20 26 27 15 23 18 22 21 18 23 26 18 29 12 15 25 8 28 27 11 24 19 4 22 28 12 22 21 14 3 18 12 5 2 12 11 1 21 7 9 5 5 8 1 5 5 4 11 12 9 11 6 6 4 
+Umpire 1:   20 22 20 19 29 27 28 17 25 23 23 16 28 24 24 27 28 17 13 23 30 19 24 17 29 4 16 6 25 8 12 2 25 12 13 26 8 8 3 10 19 17 5 1 4 12 4 8 10 7 2 18 6 15 12 13 18 13 
+Umpire 2:   17 23 23 18 30 22 10 13 20 14 25 24 23 25 16 29 30 15 27 19 11 7 30 20 7 23 3 18 15 9 6 22 1 14 20 1 17 18 8 4 2 4 16 13 19 15 9 7 11 2 3 1 10 11 15 12 5 7 
+Umpire 3:   27 27 18 17 24 16 21 28 28 21 15 20 27 29 28 22 18 10 30 14 14 9 23 9 15 17 24 9 24 11 10 3 4 7 3 24 22 17 13 6 21 8 3 8 16 13 1 2 3 14 11 7 5 10 3 2 9 16 
+Umpire 4:   28 20 16 23 27 20 23 12 24 27 28 25 19 30 7 24 23 30 29 12 23 8 4 16 5 20 9 14 14 29 9 6 17 27 26 25 7 14 22 5 11 2 6 22 7 8 12 9 13 15 1 13 2 2 8 7 10 3 
+Umpire 5:   26 17 26 25 18 23 15 29 22 29 13 30 14 27 27 16 17 22 26 22 15 11 21 22 18 15 8 4 5 23 30 25 11 16 24 3 1 21 20 17 7 18 19 4 8 6 15 14 14 8 5 16 4 3 17 3 1 6 
+Umpire 6:   29 21 22 24 19 25 11 23 26 13 20 27 8 19 30 28 21 16 20 17 10 14 26 24 6 13 30 30 21 19 24 10 2 1 22 16 18 1 19 20 15 1 9 2 23 10 7 3 7 4 17 3 16 6 2 14 14 2 
+Umpire 7:   24 26 24 28 21 30 25 25 13 11 27 18 20 17 18 23 26 19 22 24 9 25 29 10 14 12 23 10 11 1 21 28 13 2 6 14 3 22 4 1 16 7 4 5 10 3 14 13 1 3 13 12 9 12 7 9 2 1 
+Umpire 8:   18 18 19 26 17 17 24 21 29 30 24 19 22 28 10 15 19 20 10 6 27 29 28 27 19 27 26 3 6 21 1 13 8 17 15 11 21 3 2 15 5 12 2 7 6 9 3 16 9 10 12 9 3 4 10 8 17 10 
+Umpire 9:   22 30 29 22 22 19 13 11 21 26 26 22 25 18 19 20 27 26 17 13 28 26 25 6 16 10 27 26 7 30 25 1 6 19 14 7 23 13 25 3 4 16 11 15 20 19 10 15 2 9 14 4 7 16 1 4 12 5 
+Umpire 10:   23 25 25 20 23 18 12 14 15 28 21 23 24 20 21 30 13 29 24 10 29 27 11 15 27 5 18 20 26 20 2 8 28 5 2 23 13 9 1 2 20 11 21 18 1 4 2 6 8 1 16 8 11 14 5 1 7 9 
+Umpire 11:   30 24 21 29 28 24 29 30 27 12 17 26 16 22 29 26 24 13 14 30 25 10 7 28 9 6 22 21 12 25 26 18 21 21 1 20 20 4 23 9 10 15 18 3 2 17 16 4 6 18 6 10 1 7 9 19 13 14 
+Umpire 12:   25 28 30 16 16 29 26 27 11 25 30 13 26 26 23 19 14 14 11 28 12 18 9 30 23 22 15 25 2 3 4 19 29 28 4 5 2 5 10 21 3 6 8 10 14 1 6 12 4 6 7 2 13 5 6 11 3 12 
+Umpire 13:   16 29 27 21 26 28 30 24 9 22 29 29 30 14 15 25 15 27 12 15 26 20 8 29 28 30 11 29 29 5 15 27 22 9 25 2 11 20 24 18 6 5 17 6 3 7 5 5 12 11 8 5 8 8 13 10 4 11 
+Umpire 14:   21 16 28 27 25 21 19 26 30 24 18 28 29 21 8 17 22 28 28 11 24 30 16 7 26 29 7 12 19 27 16 17 20 23 5 4 19 25 5 7 17 3 1 12 9 2 20 10 15 13 9 6 14 1 4 5 8 8 
+
+Home venue constraint?: 215000
+Q1 (Q1=15) constraint?: 1905000
+Q2 (Q2=7) constraint?: 1510000
+Population Size: 1000
+Time taken by loop: 7200 seconds
+Average time per generation: 0 microseconds, or around 0 miliseconds
