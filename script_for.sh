@@ -2,7 +2,7 @@ foldername="output/$(date +%d-%m-%y_%H-%M-%S)"
 echo "folder name: $foldername"
 mkdir -p "$foldername"
 
-nIter=1000
+nIter=10000000
 nIndividuals=1000
 
 nTeams=4
@@ -51,7 +51,6 @@ do
 	done
 done
 
-nIter=10000000
 nTeams=12
 for q1 in 1 2 3 4
 do
