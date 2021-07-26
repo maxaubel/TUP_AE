@@ -340,6 +340,8 @@ int main(int argc, char const *argv[]){
     time_t stop;
     time_t start = time(NULL);
 
+    printf("generation;fitness;q1;q2;home_venue;fitness_sum\n");
+
     while(current_iter <= nIter) {
         
         sort( population.begin(), population.end());
@@ -371,12 +373,25 @@ int main(int argc, char const *argv[]){
         population = new_generation;
         current_iter++;
 
-        printf("\nGeneration: %d && ", current_iter);
 
-        int i = 0;
+        /*int i = 0;
+        printf("\nGeneration: %d && ", current_iter);
         printf("Fitness individual %d: %d, home_venue: %d", i, population[i].fitness, home_venue_constraint(population[i].chromosome));
         printf(", q1: %d", q1_constraint(population[0].chromosome));
         printf(", q2: %d", q2_constraint(population[0].chromosome));
+        */
+
+        int fitness_sum = 0;
+        for (int i = 0; i < population.size(); ++i)
+            fitness_sum += population[i].fitness;
+
+        printf("%d;%d;%d;%d;%d;%d\n", 
+            current_iter, 
+            population[0].fitness, 
+            q1_constraint(population[0].chromosome), 
+            q2_constraint(population[0].chromosome), 
+            home_venue_constraint(population[0].chromosome),
+            fitness_sum);
 
         stop = time(NULL);
 
