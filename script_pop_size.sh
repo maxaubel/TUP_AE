@@ -7,7 +7,7 @@ nIter=10000000
 
 
 nTeams=20
-q1=6
+q1=3
 q2=2
 
 function first {
