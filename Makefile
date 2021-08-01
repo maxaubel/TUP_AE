@@ -1,5 +1,5 @@
 CXX	 = clang++
-CXXFLAGS = -g -O2 -Wall
+CXXFLAGS = -g -O3 -Wall
 
 all: TUP
 
