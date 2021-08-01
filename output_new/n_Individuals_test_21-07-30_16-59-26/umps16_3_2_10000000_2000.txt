@@ -25800,26 +25800,3 @@ generation;fitness;q1;q2;home_venue;fitness_sum
 25799;179914;0;0;0;815431958
 25800;179914;0;0;0;820627349
 25801;179914;0;0;0;816445514
-
-
-Maximum run time of 2 hours reached before reaching 10000000!!
-
-Generation: 25801
-~~~~~~~~~~~~~~~~
-
-Fitness: 179914
-Umpire 0:   13 16 14 9 11 16 14 13 15 6 7 16 15 12 13 14 16 15 4 5 8 2 7 1 4 6 10 2 3 4 
-Umpire 1:   14 12 15 10 16 14 12 8 11 4 5 15 16 11 14 13 10 3 6 1 4 7 2 8 3 4 1 7 9 8 
-Umpire 2:   11 15 12 13 9 8 15 16 12 14 10 11 7 4 8 3 1 6 10 12 2 4 1 5 6 3 11 9 2 6 
-Umpire 3:   10 9 13 16 14 15 11 9 16 8 6 5 3 8 6 1 4 10 2 3 1 6 5 11 12 2 7 5 11 2 
-Umpire 4:   15 13 16 12 10 7 13 12 9 11 13 6 8 7 2 5 8 14 13 11 6 3 4 2 5 7 4 1 5 9 
-Umpire 5:   16 14 11 15 12 6 16 14 7 15 16 13 4 3 5 12 14 1 8 2 10 1 3 9 2 10 5 4 1 3 
-Umpire 6:   12 10 9 11 13 12 10 15 8 7 14 12 13 16 10 7 6 2 3 9 13 5 6 3 7 1 2 3 4 1 
-Umpire 7:   9 11 10 14 15 11 9 10 14 16 15 4 12 13 15 9 2 8 1 7 5 9 8 7 1 5 3 6 8 5 
-
-Home venue constraint?: 0
-Q1 (Q1=3) constraint?: 0
-Q2 (Q2=2) constraint?: 0
-Population Size: 2000
-Time taken by loop: 7200 seconds
-Average time per generation: 0 microseconds, or around 0 miliseconds
