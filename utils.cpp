@@ -89,7 +89,7 @@ int q1_constraint(vector<vector<int>> chromosome) {
 
     for (int i = 0; i < chromosome_T.size(); ++i)
         for (int j = 0; j < chromosome_T[i].size(); ++j)
-            for (int k = 1; k <= q1 and j+k<chromosome_T[i].size(); k++)  
+            for (int k = 1; k < q1 and j+k<chromosome_T[i].size(); k++)  // prev k <= q1
                 if (chromosome_T[i][j] == chromosome_T[i][j+k])
                     penalization += Q1_PENALIZATION;
 
@@ -110,7 +110,7 @@ int q2_constraint(vector<vector<int>> chromosome) {
     {
         for (int j = 0; j < chromosome_T[i].size(); ++j)
         {
-            for (int k = 1; k <= q2 and j+k<chromosome_T[i].size(); k++)
+            for (int k = 1; k < q2 and j+k<chromosome_T[i].size(); k++) // prev k <= q2
             {   
                 int current_local = abs(chromosome_T[i][j]);
                 int current_visitor = abs(opponents[i][chromosome_T[i][j]-1]);
