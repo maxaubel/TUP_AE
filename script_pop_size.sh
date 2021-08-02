@@ -1,4 +1,4 @@
-foldername="output_new/n_Individuals_test_$(date +%y-%m-%d_%H-%M-%S)"
+foldername="output_new_1/n_Individuals_test_$(date +%y-%m-%d_%H-%M-%S)"
 echo "folder name: $foldername"
 mkdir -p "$foldername"
 
@@ -6,7 +6,7 @@ nIter=10000000
 #nIndividuals=1000
 
 
-nTeams=20
+nTeams=30
 q1=3
 q2=2
 
