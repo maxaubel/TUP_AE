@@ -21,10 +21,8 @@ int main(int argc, char const *argv[]){
 
     POPULATION_SIZE = 100;
     int nIter;
-    if (argc == 6) {
+    if (argc == 6)
         POPULATION_SIZE = stoi( argv[5] );
-    }
-
 
     string filename = argv[1];
     q1 = stoi( argv[2] );
