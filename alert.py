@@ -2,7 +2,7 @@ from discord_webhook import DiscordWebhook, DiscordEmbed
 from datetime import datetime
 import sys
 
-webhook_url = "https://discord.com/api/webhooks/868875220121944125/jOBMe52vA4Huo6rbOfMMjnXin_DrSTgq9rLnqPHA_HNEh-1AjhrzYmeLfYhZ-JZ94DNL"
+webhook_url = ""
 
 def send_to_discord(message):
     webhook = DiscordWebhook(url=webhook_url, 
