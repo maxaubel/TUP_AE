@@ -3,3 +3,4 @@ test/
 output/
 TUP
 *.o
+alert_priv.py
