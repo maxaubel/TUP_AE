@@ -1,0 +1,5 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/max/Documents/U/Computación de Alto Desempeño/TUP_AE'
+make: Nothing to be done for 'all'.
+make: Leaving directory '/home/max/Documents/U/Computación de Alto Desempeño/TUP_AE'
+ 
