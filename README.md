@@ -1,8 +1,7 @@
 # Traveling Umpire Problem
 ## Evolutionary Algorithm
 
-This approach solves the TUP with an EA.
-
+This approach solves the TUP with an Evolutionary Algorithm (EA).
 
 ### To compile:
 	
@@ -17,11 +16,11 @@ This approach solves the TUP with an EA.
 
 	$ ./TUP instances/umps16.txt 3 2 10000 100
 
-This will find solutions for the instance stored in ``instances/umps16.txt`` with ``q1=3``,  ``q2=2``, it will iterate 10000 times, and the population size for each generation will be 100. The programm will run up to 2 hours only, if you want to run it longer, you will need to edit this value (7200 seconds) in ``main.cpp``.
+This will find solutions for the instance stored in ``instances/umps16.txt`` with ``q1=3``,  ``q2=2``, it will iterate 10000 times, and the population size for each generation will be 100. The program will run up to 2 hours only, if you want to run it longer, you will need to edit this value (7200 seconds) in ``main.cpp``.
 
 ## Input
 
-The input for each instance mmust have this format:
+The input for each instance must have this format:
 	
 	nTeams=N;
 	dist= [
@@ -44,7 +43,7 @@ The input for each instance mmust have this format:
 
 ## Output
 
-The program will first print the following lines. You can take this and pipe it to a text file to test its performance
+The program will first print the following lines. You can take this and pipe this output to a text file to analyze its performance
 
 	generation;fitness;q1;q2;home_venue;fitness_sum
 	1;1836576;430000;285000;345000;182624438
@@ -80,5 +79,5 @@ I added some scripts that helped me try many combinations of parameters:
 
 * `script.sh` will just run many instances with the defined parameters sequentially.
 * `script_for.sh` will run 3 parallel instances simultaneously to save some time.
-* `script_parallel.sh` **don not use this script.** It will probably freeze you computer, because it will start many many parallel instances.
+* `script_parallel.sh` **do not use this script.** It will probably freeze you computer, because it will start many many parallel instances.
 * `script_pop_size.sh` will iterate over a number of predefined population sizes.

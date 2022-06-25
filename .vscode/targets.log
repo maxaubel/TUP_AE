@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Jun 24 16:26:04 2022
+# Make data base, printed on Sat Jun 25 01:20:39 2022
 
 # Variables
 
@@ -19,7 +19,7 @@ NO_AT_BRIDGE = 1
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-a55940f3-9c10-4fac-bdc2-0e53b7c88b8d.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-43bda2b1-e234-4548-b2d3-32c5c1f7770c.sock
 # environment
 LC_NAME = es_CL.UTF-8
 # environment
@@ -89,7 +89,7 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 14039
+VSCODE_PID = 3157
 # environment
 XDG_SESSION_TYPE = x11
 # environment
@@ -97,7 +97,7 @@ CUDA_PATH = /opt/cuda
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/falconh:@/tmp/.ICE-unix/1944,unix/falconh:/tmp/.ICE-unix/1944
+SESSION_MANAGER = local/falconh:@/tmp/.ICE-unix/1933,unix/falconh:/tmp/.ICE-unix/1933
 # automatic
 *F = $(notdir $*)
 # environment
@@ -139,7 +139,7 @@ MOTD_SHOWN = pam
 # environment
 LC_TIME = es_CL.UTF-8
 # environment
-INVOCATION_ID = 846dcf4fc8eb409fb1bae9ab000bc1d6
+INVOCATION_ID = 7ea8d355d7ab4fc69ceed1baefd50dd7
 # environment
 VSCODE_LOG_NATIVE = false
 # environment
@@ -167,7 +167,7 @@ GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/visual-studio-code.desktop
 # makefile
 .DEFAULT_GOAL := all
 # environment
-SYSTEMD_EXEC_PID = 1960
+SYSTEMD_EXEC_PID = 1949
 # environment
 EDITOR = /usr/bin/micro
 # environment
@@ -177,22 +177,21 @@ USER = max
 # default
 MAKE_VERSION := 4.3
 # environment
-MANAGERPID = 1473
+MANAGERPID = 1462
 # environment
 LC_MEASUREMENT = es_CL.UTF-8
 # environment
 DEBUGINFOD_URLS = https://debuginfod.archlinux.org 
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 14021
+GIO_LAUNCHED_DESKTOP_FILE_PID = 3138
 # environment
 _ = /usr/bin/make
- 
 # environment
 LC_PAPER = es_CL.UTF-8
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
-JOURNAL_STREAM = 8:26054
+JOURNAL_STREAM = 8:16333
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -240,9 +239,9 @@ LC_IDENTIFICATION = es_CL.UTF-8
 
 # Directories
 
-# . (device 40, inode 1737796): 29 files, no impossibilities.
+# . (device 40, inode 1737796): 30 files, no impossibilities.
 
-# 29 files, no impossibilities in 1 directories.
+# 30 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -279,6 +278,7 @@ clean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
+ 
 #  recipe to execute (from 'Makefile', line 14):
 	rm -f *.o TUP_CPU
 
@@ -339,7 +339,6 @@ TUP:
 
 # Not a target:
 common.h:
- 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -352,12 +351,12 @@ common.h:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 37 / storage = 379 B / avg = 10 B
-# current buf: size = 8162 B / used = 379 B / count = 37 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 38 / storage = 394 B / avg = 10 B
+# current buf: size = 8162 B / used = 394 B / count = 38 / avg = 10 B
 
-# strcache performance: lookups = 63 / hit rate = 41%
+# strcache performance: lookups = 64 / hit rate = 40%
 # hash-table stats:
-# Load=37/8192=0%, Rehash=0, Collisions=0/63=0%
-# Finished Make data base on Fri Jun 24 16:26:04 2022
+# Load=38/8192=0%, Rehash=0, Collisions=0/64=0%
+# Finished Make data base on Sat Jun 25 01:20:39 2022
 
  
