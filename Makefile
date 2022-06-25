@@ -1,7 +1,7 @@
 CXX	 = g++
 CXXFLAGS = -g -O3 -Wall
 
-all: TUP
+all: TUP_CPU
 
 TUP_CPU: main.o utils.o individual.o
 	$(CXX) $(CXXFLAGS) -o $@ $^
