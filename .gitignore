@@ -4,3 +4,5 @@ output/
 TUP
 *.o
 alert_priv.py
+TUP_CPU
+.vscode/

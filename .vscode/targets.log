@@ -5,8 +5,9 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
+ 
 
-# Make data base, printed on Sat Jun 25 01:20:39 2022
+# Make data base, printed on Sat Jun 25 11:26:46 2022
 
 # Variables
 
@@ -239,9 +240,9 @@ LC_IDENTIFICATION = es_CL.UTF-8
 
 # Directories
 
-# . (device 40, inode 1737796): 30 files, no impossibilities.
+# . (device 40, inode 1737796): 31 files, no impossibilities.
 
-# 30 files, no impossibilities in 1 directories.
+# 31 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -250,48 +251,53 @@ LC_IDENTIFICATION = es_CL.UTF-8
 # Files
 
 individual.o: individual.cpp
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-06-24 14:10:13.410637182
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-24 16:19:55.882773861
+#  Last modified 2022-06-25 11:25:00.398254482
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 individual.h:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-06-24 13:57:20.221695817
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 individual.cpp:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-06-24 13:57:20.221695817
+#  File has been updated.
+#  Successfully updated.
 
 clean:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
- 
 #  recipe to execute (from 'Makefile', line 14):
 	rm -f *.o TUP_CPU
 
 # Not a target:
 utils.h:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-06-24 13:57:22.296687875
+#  File has been updated.
+#  Successfully updated.
 
 TUP_CPU: main.o utils.o individual.o
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+ 
+#  Last modified 2022-06-25 11:26:02.563063431
+#  File has been updated.
+#  Successfully updated.
 #  recipe to execute (from 'Makefile', line 7):
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
@@ -301,7 +307,7 @@ TUP_CPU: main.o utils.o individual.o
 #  Modification time never checked.
 #  File has not been updated.
 
-all: TUP
+all: TUP_CPU
 #  Phony target (prerequisite of .PHONY).
 #  Command line target.
 #  Implicit rule search has not been done.
@@ -310,20 +316,23 @@ all: TUP
 #  Successfully updated.
 
 main.o: utils.h individual.h common.h
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-06-24 14:10:10.385646897
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 utils.cpp:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-06-24 13:57:22.296687875
+#  File has been updated.
+#  Successfully updated.
 
 utils.o: utils.cpp
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-06-24 14:10:12.018643288
+#  File has been updated.
+#  Successfully updated.
 
 .PHONY: all clean
 #  Implicit rule search has not been done.
@@ -331,20 +340,14 @@ utils.o: utils.cpp
 #  File has not been updated.
 
 # Not a target:
-TUP:
+common.h:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-24 14:10:13.497636482
+#  Last modified 2022-06-24 13:57:20.221695817
 #  File has been updated.
 #  Successfully updated.
 
-# Not a target:
-common.h:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
 # files hash-table stats:
-# Load=16/1024=2%, Rehash=0, Collisions=0/41=0%
+# Load=15/1024=1%, Rehash=0, Collisions=0/41=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
@@ -354,9 +357,9 @@ common.h:
 # strcache buffers: 1 (0) / strings = 38 / storage = 394 B / avg = 10 B
 # current buf: size = 8162 B / used = 394 B / count = 38 / avg = 10 B
 
-# strcache performance: lookups = 64 / hit rate = 40%
+# strcache performance: lookups = 65 / hit rate = 41%
 # hash-table stats:
-# Load=38/8192=0%, Rehash=0, Collisions=0/64=0%
-# Finished Make data base on Sat Jun 25 01:20:39 2022
+# Load=38/8192=0%, Rehash=0, Collisions=0/65=0%
+# Finished Make data base on Sat Jun 25 11:26:46 2022
 
  
