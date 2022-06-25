@@ -175,7 +175,7 @@ vector<vector<int>> create_gnome() {
     return gnome;
 }
 
-// class to represent an individual from in a population
+// class to represent an individual from a population
 class Individual {
 public: 
     vector<vector<int>> chromosome;
